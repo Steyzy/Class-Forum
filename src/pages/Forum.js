@@ -24,6 +24,7 @@ export default class Forum extends Component {
         <ListForums/>
         <hr/>
         <JoinedForums/>
+        <hr/>
       </div>
     );
   }

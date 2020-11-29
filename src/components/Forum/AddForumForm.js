@@ -25,12 +25,15 @@ export default class AddForumForm extends Component {
     }
     render() {
       return (
-        <form onSubmit={this.handleSubmit}>
-          <p>Enter the name of the course you want to add:</p>
-          <input type="text" name="name" onChange={this.handleChange} 
-                  placeholder="Enter course name" />
-          <input type="submit" />
-        </form>
+        <div>
+          <h4>Create A Forum</h4>
+          <form onSubmit={this.handleSubmit}>
+            <p>Enter the name of the course you want to add:</p>
+            <input type="text" name="name" onChange={this.handleChange} 
+                    placeholder="Enter course name" />
+            <input type="submit" />
+          </form>
+        </div>
       )
     }
   }

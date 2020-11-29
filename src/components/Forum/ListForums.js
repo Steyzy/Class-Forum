@@ -32,25 +32,27 @@ export default class ListForums extends Component {
         event.preventDefault(); // this is needed to make it work
         db.ref('/users/' + auth().currentUser.uid + '/forums/' + this.state.selectedId).update({
           key: this.state.selectedId,
-          fid: this.state.selectedId,
         });        
         alert("Success!");
     }
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <select onChange={this.handleChange}>
-                <option defaultValue="" disabled selected hidden>Select a forum to join</option>
-                    {this.state.forums.map(forum => {
-                        return (
-                            <option key={forum.id} my_key={forum.id}>
-                                {forum.name}
-                            </option>
-                        )
-                    })}
-                </select>
-                <input type="submit" />
-            </form>
+            <div>
+                <h4>Join A Forum</h4>
+                <form onSubmit={this.handleSubmit}>
+                    <select onChange={this.handleChange}>
+                    <option defaultValue="" disabled selected hidden>Select a forum to join</option>
+                        {this.state.forums.map(forum => {
+                            return (
+                                <option key={forum.id} my_key={forum.id}>
+                                    {forum.name}
+                                </option>
+                            )
+                        })}
+                    </select>
+                    <input type="submit" />
+                </form>
+            </div>
         )
     }
 }

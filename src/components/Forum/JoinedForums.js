@@ -4,17 +4,33 @@ import { auth, db } from "../../services/firebase.js"
 export default class JoinedForums extends Component {
     constructor(props) {
         super(props);
-        let val = db.ref('users/' + auth().currentUser.uid + '/forums').on('value', (snapshot) => {
+        this.state = {
+            forums: [],
+        }
+    }
+    componentDidMount() {
+        db.ref('users/' + auth().currentUser.uid + '/forums').on('value', snapshot => {
+            let forums = [];
             snapshot.forEach(snap => {
-                console.log(snap.val());
-            })
+                forums.push({name: snap.val().key, id: snap.key});
+            });
+            this.setState({ forums: forums});
         })
     }
     render() {
         
         return (
             <div>
-                <p>Your forums</p>
+                <h4>Your Forums</h4>
+                <ul>
+                    {this.state.forums.map(forum => {
+                        return (
+                            <div>
+                                <li key={forum.key}>{forum.name}</li><br/>
+                            </div>
+                        )
+                    })}
+                </ul>
             </div>
         )
     }
