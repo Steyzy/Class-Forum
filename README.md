@@ -8,7 +8,8 @@ config里的variables都存到自己本地的environmental variable里这样我�
 ## Technologies Used
 
 - JavaScript
-- [React](https://reactjs.org).
+- [React](https://reactjs.org)
+- [Firebase](https://firebase.google.com/)
 
 
 ## Installations
