@@ -30,7 +30,7 @@ export default class ListForums extends Component {
     }    
     handleSubmit(event) {
         event.preventDefault(); // this is needed to make it work
-        // TODO: do nothing is already in the list
+        // TODO: do nothing if the forums is already in the list
         db.ref('/users/' + auth().currentUser.uid + '/forums').push().set({
           fid: this.state.selectedId,
         });        

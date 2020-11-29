@@ -15,6 +15,7 @@ export default class AddForumForm extends Component {
     }
     handleSubmit(event) {
       event.preventDefault(); // this is needed to make it work
+      // TODO: do nothing if the forums is already in the list
       db.ref('/forums').push({
         name: this.state.name,
       });
