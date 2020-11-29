@@ -6,7 +6,10 @@ export default class ListForums extends Component {
         super(props);
         this.state = {
             forums: [],
+            selectedId: 0,
         }
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
         db.ref('forums/').on("value", snapshot => {
@@ -18,16 +21,29 @@ export default class ListForums extends Component {
         })
 
     }
-    getForums() {
+    // React does not allow me to extract key, so I have to extract my_key
+    // to identify the forum chosen
+    handleChange(event) {
+        const index = event.target.options.selectedIndex;
+        const id = event.target.options[index].getAttribute('my_key');
+        this.setState({selectedId: id});
+    }    
+    handleSubmit(event) {
+        event.preventDefault(); // this is needed to make it work
+        // TODO: do nothing is already in the list
+        db.ref('/users/' + auth().currentUser.uid + '/forums').push().set({
+          fid: this.state.selectedId,
+        });        
+        alert("Success!");
     }
     render() {
         return (
-            <form>
-                <select>
-                <option value="" disabled selected hidden>Select a forum to join</option>
+            <form onSubmit={this.handleSubmit}>
+                <select onChange={this.handleChange}>
+                <option defaultValue="" disabled selected hidden>Select a forum to join</option>
                     {this.state.forums.map(forum => {
                         return (
-                            <option key={forum.id}>
+                            <option key={forum.id} my_key={forum.id}>
                                 {forum.name}
                             </option>
                         )
