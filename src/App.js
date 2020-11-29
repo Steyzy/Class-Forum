@@ -6,9 +6,10 @@ import {
   Redirect
 } from "react-router-dom";
 import Home from "./pages/Home";
-import Forum from "./pages/Forum";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Forum from "./pages/Forum";
+import Profile from "./pages/Profile";
 import { auth } from "./services/firebase";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
@@ -54,6 +55,7 @@ class App extends Component {
 
   componentDidMount() {
     auth().onAuthStateChanged(user => {
+      // if user is logged in
       if (user) {
         this.setState({
           authenticated: true,
@@ -82,6 +84,11 @@ class App extends Component {
               authenticated={this.state.authenticated}
               component={Forum}
             />
+            <PrivateRoute
+              path="/profile"
+              authenticated={this.state.authenticated}
+              component={Profile}
+            />            
             <PublicRoute
               path="/signup"
               authenticated={this.state.authenticated}

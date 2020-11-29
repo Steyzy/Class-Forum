@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { logout } from "../helpers/auth"
+import Navbar from '../components/Navbar';
 
 export default class Forum extends Component {
   constructor() {
@@ -13,7 +14,7 @@ export default class Forum extends Component {
     return (
       <div>
         <h1>Forum</h1>
-        <button onClick={logout}>Log Out</button>
+        <Navbar loggedIn={true}/>
       </div>
     );
   }
