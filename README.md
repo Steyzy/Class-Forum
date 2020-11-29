@@ -9,7 +9,7 @@ config里的variables都存到自己本地的environmental variable里这样我�
 
 - JavaScript
 - [React](https://reactjs.org)
-- [Firebase](https://firebase.google.com/)
+- [Firebase Realtime Database](https://firebase.google.com/docs/database)
 
 
 ## Installations
