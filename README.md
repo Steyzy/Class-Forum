@@ -26,9 +26,22 @@ config里的variables都存到自己本地的environmental variable里这样我�
 #### Setup
 
 - Installing the project dependencies
-  > Run the command below
+  > run the command below
   ```shell
   $ npm install
+  ```
+- Setup Firebase
+  <sub>
+    Not 100% sure if the app will work after these commands. 
+    Contact me if it doesn't
+  </sub>
+  > run the command below
+  ```shell
+  $ npm install -g firebase-tools
+  $ firebase login
+  # And then log in from the browser
+  $ firebase init
+  $ firebase deploy
   ```
 - Start the project
   > run the command below
