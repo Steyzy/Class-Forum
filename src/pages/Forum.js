@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import AddForumForm from '../components/Forum/AddForumForm';
 import ListForums from '../components/Forum/ListForums';
 import JoinedForums from '../components/Forum/JoinedForums';
+import CurrentForum from '../components/Forum/CurrentForum';
+
 
 
 export default class Forum extends Component {
@@ -25,6 +27,7 @@ export default class Forum extends Component {
         <hr/>
         <JoinedForums/>
         <hr/>
+        <CurrentForum/>
       </div>
     );
   }
