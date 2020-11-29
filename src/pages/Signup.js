@@ -11,10 +11,12 @@ export default class SignUp extends Component {
       email: '',
       password: '',
     };
+    // the following two lines are absolutely necessary to prevent crashing
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // update the values in the state as the user types input
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
