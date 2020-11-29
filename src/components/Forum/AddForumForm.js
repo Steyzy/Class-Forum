@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { db } from "../../services/firebase.js"
+import { auth, db } from "../../services/firebase.js"
 
 
 
@@ -14,8 +14,9 @@ export default class AddForumForm extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(event) {
-      db.ref('/forums/cs97').set({
-        value: "cs33"
+      event.preventDefault(); // this is needed to make it work
+      db.ref('/forums').push({
+        name: this.state.name,
       });
       alert("submitting: " + this.state.name);
     }
@@ -26,7 +27,8 @@ export default class AddForumForm extends Component {
       return (
         <form onSubmit={this.handleSubmit}>
           <p>Enter the name of the course you want to add:</p>
-          <input type="text" name="name" onChange={this.handleChange} />
+          <input type="text" name="name" onChange={this.handleChange} 
+                  placeholder="Enter course name" />
           <input type="submit" />
         </form>
       )

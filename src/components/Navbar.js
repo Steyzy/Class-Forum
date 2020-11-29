@@ -12,7 +12,7 @@ export default class Navbar extends Component {
 
     render() {
         return (
-            <div class="navbar">
+            <div className="navbar">
                 {this.state.loggedIn ? 
                     <div>
                         <Link to="/forum">Forum</Link> <br/>                 
