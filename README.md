@@ -30,7 +30,7 @@ config里的variables都存到自己本地的environmental variable里这样我�
   ```shell
   $ npm install
   ```
-- Setup Firebase
+- Setup Firebase  
   <sub>
     Not 100% sure if the app will work after these commands. 
     Contact me if it doesn't
