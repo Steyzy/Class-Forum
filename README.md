@@ -1,6 +1,6 @@
 ## Communication
 
-*大家记得把firebase.js的config里的variables都存到自己本地的environmental variable
+* 大家记得把firebase.js的config里的variables都存到自己本地的environmental variable
 里这样我之后就吧这些从script里移出去换成process.env.VAR_NAME。把密码hardcode到
 script里不太安全。  
      - Ray
