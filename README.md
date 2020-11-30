@@ -21,12 +21,17 @@ script里不太安全。  - Ray
 #### Clone
 
 - Clone this project to your local machine `https://github.com/rayguo233/forum.git`
+  > run the command below
+  ```
+  $ git clone https://github.com/rayguo233/forum.git
+  ```
 
 #### Setup
 
 - Installing the project dependencies
   > run the command below
   ```shell
+  $ cd forum
   $ npm install
   ```
 - Setup Firebase  
