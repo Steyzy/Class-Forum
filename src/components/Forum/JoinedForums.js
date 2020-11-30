@@ -17,8 +17,7 @@ export default class JoinedForums extends Component {
             this.setState({ forums: forums});
         })
     }
-    render() {
-        
+    render() {        
         return (
             <div>
                 <h4>Your Forums</h4>
@@ -26,7 +25,12 @@ export default class JoinedForums extends Component {
                     {this.state.forums.map(forum => {
                         return (
                             <div>
-                                <li key={forum.key}>{forum.name}</li><br/>
+                                <li key={forum.key}>
+                                    <a href="#" onClick={this.props.onClick}>
+                                        {forum.name}
+                                    </a>    
+                                </li>
+                                <br/>
                             </div>
                         )
                     })}

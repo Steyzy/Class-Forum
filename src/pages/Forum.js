@@ -6,15 +6,19 @@ import JoinedForums from '../components/Forum/JoinedForums';
 import CurrentForum from '../components/Forum/CurrentForum';
 
 
-
 export default class Forum extends Component {
   constructor() {
     super()
     this.state = {
       error: '',
+      currForum: '',
     }
+    // the following binding is needed for any handle functions
+    this.handleForumSwitch = this.handleForumSwitch.bind(this);
   }
-
+  handleForumSwitch(event) {
+    this.setState({ currForum: event.target.textContent });
+  }
   render() {
     return (
       <div>
@@ -25,9 +29,9 @@ export default class Forum extends Component {
         <hr/>
         <ListForums/>
         <hr/>
-        <JoinedForums/>
+        <JoinedForums onClick={this.handleForumSwitch}/>
         <hr/>
-        <CurrentForum/>
+        <CurrentForum currForum={this.state.currForum}/>
       </div>
     );
   }
