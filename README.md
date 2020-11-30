@@ -41,7 +41,7 @@ script里不太安全。  - Ray
   </sub>
   > run the command below
   ```shell
-  $ npm install -g firebase-tools
+  $ curl -sL https://firebase.tools | bash
   $ firebase login
   # And then log in from the browser
   $ firebase init
