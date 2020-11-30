@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
-import Post from './Post';
+import Posts from './Posts';
 
 
 export default class CurrentForum extends Component {
@@ -17,8 +17,12 @@ export default class CurrentForum extends Component {
     render() {
         return (
             <div>
-                <h4>Current Forum: {this.state.currForum}</h4>
-                <Post/>
+                <h2>Current Forum: {this.state.currForum}</h2>
+                {this.state.currForum == '' ?
+                    <p>Choose a forum to view</p>
+                    :
+                    <Posts currForum={this.state.currForum}/>                    
+                }
             </div>
         )
     }

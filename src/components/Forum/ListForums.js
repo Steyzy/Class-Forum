@@ -38,7 +38,7 @@ export default class ListForums extends Component {
     render() {
         return (
             <div>
-                <h4>Join A Forum</h4>
+                <h2>Join A Forum</h2>
                 <form onSubmit={this.handleSubmit}>
                     <select onChange={this.handleChange}>
                     <option defaultValue="" disabled selected hidden>Select a forum to join</option>

@@ -26,7 +26,7 @@ export default class AddForumForm extends Component {
     render() {
       return (
         <div>
-          <h4>Create A Forum</h4>
+          <h2>Create A Forum</h2>
           <form onSubmit={this.handleSubmit}>
             <p>Enter the name of the course you want to add:</p>
             <input type="text" name="name" onChange={this.handleChange} 

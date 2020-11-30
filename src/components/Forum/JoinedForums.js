@@ -20,12 +20,13 @@ export default class JoinedForums extends Component {
     render() {        
         return (
             <div>
-                <h4>Your Forums</h4>
+                <h2>Your Forums</h2>
+                <label>Click a forum to view posts there</label><br/>
                 <ul>
                     {this.state.forums.map(forum => {
                         return (
                             <div>
-                                <li key={forum.key}>
+                                <li key={forum.id}>
                                     <a href="#" onClick={this.props.onClick}>
                                         {forum.name}
                                     </a>    
