@@ -10,6 +10,9 @@ script里不太安全。  - Ray
 - [React](https://reactjs.org)
 - [Firebase Realtime Database](https://firebase.google.com/docs/database)
 
+## Useful Links
+
+- [Firebase Realtime Database](https://firebase.google.com/docs/database/web/structure-data?authuser=0)
 
 ## Installations
 
