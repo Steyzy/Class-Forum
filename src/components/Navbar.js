@@ -14,13 +14,6 @@ const Button = styled.button`
   text-decoration: none;
 `
 
-const Wrapper = styled.section`
-  padding: 5em;
-  background: papayawhip;
-  text-align: center;
-  margin: 0;
-`
-
 export default class Navbar extends Component {
     constructor(props) {
         super(props);
@@ -33,23 +26,23 @@ export default class Navbar extends Component {
         return (
             <div className="navbar">
                 {this.state.loggedIn ? 
-                    <Wrapper>
+                    <div>
                         <Button as="a" href="/forum">Forum</Button>
                         <Button >Profile</Button>
                         <Button onClick={logout}>Log Out</Button>
                         {/*<Link to="/forum">Forum</Link> <br/>             
                         <Link to="/profile">Profile</Link> <br/>                 
                         <button onClick={logout}>Log Out</button>*/}
-                    </Wrapper> 
+                    </div> 
                  : 
-                    <Wrapper>
+                    <div>
                         <Button as="a" href="/">Home</Button>
                         <Button as="a" href="/signup">Sign Up</Button>
                         <Button as="a" href="/login">Login</Button>
                         {/*<Link to="/">Home</Link> <br/>
                         <Link to="/signup">Sign Up</Link> <br/>               
                         <Link to="/login">Login</Link>*/}
-                    </Wrapper>
+                    </div>
                 }
             </div>
         )
