@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
 
-export default class ChangeName extends Component {
+export default class ChangeMajor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            infoAttribute: "name",
+            infoAttribute: "major",
             allInfo: [],
             infoContent: '',
         }
@@ -18,7 +18,7 @@ export default class ChangeName extends Component {
         //const infoId = db.ref('/users/' + uid + '/personInfo/name/').push().key; // push: Generates a new child location using a unique key and returns its Reference.
 
         db.ref('/users/' + uid + '/profile/').update({ // set: Writes data to this Database location. This will overwrite any data at this location and all child locations.
-            name: this.state.infoContent,
+            major: this.state.infoContent,
         });
 
         /*
@@ -28,7 +28,7 @@ export default class ChangeName extends Component {
         //console.log(infoId)
         //console.log(this.state.infoAttribute)
         */
-        alert("Successfully changed name!")
+        alert("Successfully changed major!")
     }
     handleChange(event) {
         const uid = auth().currentUser.uid;
@@ -41,10 +41,10 @@ export default class ChangeName extends Component {
     componentWillReceiveProps(props) {
         const uid = auth().currentUser.uid;
         this.setState({ 
-            infoAttribute: "name", 
+            infoAttribute: "major", 
             infoContent: '', // needed to clear the textarea after switching forum
         })
-        db.ref('/users/' + uid + '/personInfo/name').on('value', snapshot => { // ref.on is for reading data from a database
+        db.ref('/users/' + uid + '/personInfo/major').on('value', snapshot => { // ref.on is for reading data from a database
             let allInfo = [];
             snapshot.forEach(snap => {
                 allInfo.push({content: snap.val().content, id: snap.key});
@@ -58,7 +58,7 @@ export default class ChangeName extends Component {
         return (
             <div>
                 <form onSubmit={this.handleProfileChange}>
-                    <label>Change name: </label><br/>
+                    <label>Change major: </label><br/>
                     <textarea value={this.state.infoContent}
                                 onChange={this.handleChange}
                     /><br/>

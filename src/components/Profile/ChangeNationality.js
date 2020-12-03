@@ -58,7 +58,7 @@ export default class ChangeNationality extends Component {
         return (
             <div>
                 <form onSubmit={this.handleProfileChange}>
-                    <label>nationality: </label><br/>
+                    <label>Change nationality: </label><br/>
                     <textarea value={this.state.infoContent}
                                 onChange={this.handleChange}
                     /><br/>

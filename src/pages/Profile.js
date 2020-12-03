@@ -1,16 +1,32 @@
 import React, { Component } from "react"
 import Navbar from '../components/Navbar';
 import ChangeName from "../components/Profile/ChangeName";
-import ChangeNationality from "../components/Profile/ChangeNationality";
-import ChangeYear from "../components/Profile/ChangeYear";
-
-
+// import ChangeNationality from "../components/Profile/ChangeNationality";
+// import ChangeYear from "../components/Profile/ChangeYear";
+import { auth, db } from "../services/firebase.js"
 
 export default class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name:"",
+            major:"",
+            nationality:"",
+            year:"",
         }
+    }
+
+    // getinfo(){
+    //     const uid = auth().currentUser.uid;
+    //     name = db.ref('users/' + uid + '/profile/name').push();
+    //     nationality = db.ref('users/' + uid + '/profile/nationality').push();
+    //     year = db.ref('users/' + uid + '/profile/year').push();
+    // }
+    getname(){
+        const uid = auth().currentUser.uid;
+        db.ref('users/' + uid + '/profile/name').on('value',data =>{
+            this.setState({name:data});
+        })
     }
 
     render() {
@@ -18,9 +34,14 @@ export default class Profile extends Component {
             <div>
                 <h1>Profile</h1>
                 <Navbar loggedIn={true} />
-                <ChangeName />
-                <ChangeNationality />
-                <ChangeYear />
+                <p>name: {this.state.name}</p>
+                <ChangeName/>
+                <p>major: {this.state.major}</p>
+                <major/>
+                <p>nationality: {this.state.nationality}</p>
+                <nationality/>
+                <p>year: {this.state.year}</p>
+                <year/>
             </div>
         )
     }

@@ -58,7 +58,7 @@ export default class ChangeYear extends Component {
         return (
             <div>
                 <form onSubmit={this.handleProfileChange}>
-                    <label>Year:</label><br/>
+                    <label>Change year: </label><br/>
                     <textarea value={this.state.infoContent}
                                 onChange={this.handleChange}
                     /><br/>
