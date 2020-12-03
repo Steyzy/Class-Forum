@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import Navbar from '../components/Navbar';
-import ChangeName from "../components/Profile/ChangeName";
-// import ChangeNationality from "../components/Profile/ChangeNationality";
-// import ChangeYear from "../components/Profile/ChangeYear";
+import { Link } from 'react-router-dom';
 import { auth, db } from "../services/firebase.js"
 
 export default class Profile extends Component {
@@ -32,16 +30,13 @@ export default class Profile extends Component {
     render() {
         return (
             <div>
-                <h1>Profile</h1>
+                <h1>User Profile</h1>
                 <Navbar loggedIn={true} />
                 <p>name: {this.state.name}</p>
-                <ChangeName/>
                 <p>major: {this.state.major}</p>
-                <major/>
                 <p>nationality: {this.state.nationality}</p>
-                <nationality/>
                 <p>year: {this.state.year}</p>
-                <year/>
+                <Link to="/edit">Edit</Link>
             </div>
         )
     }

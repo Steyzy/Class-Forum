@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Forum from "./pages/Forum";
 import Profile from "./pages/Profile";
+import Edit from "./pages/Edit";
 import { auth } from "./services/firebase";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
@@ -98,6 +99,11 @@ class App extends Component {
               path="/login"
               authenticated={this.state.authenticated}
               component={Login}
+            />
+            <PrivateRoute
+              path="/edit"
+              authenticated={this.state.authenticated}
+              component={Edit}
             />
           </Switch>
         </Router>
