@@ -11,10 +11,13 @@ export default class Posts extends Component {
         this.state = {
             currForum: this.props.currForum,
             allPosts: [],
+            filteredPosts:[],
             postContent: '',
+            SearchInput: '',
         }
         this.handlePost = this.handlePost.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChangePostContect = this.handleChangePostContect.bind(this);
+        this.handleChangeSearchContect = this.handleChangeSearchContect.bind(this);
     }
     handlePost(event) {        
         console.log(this.state.currForum)
@@ -29,9 +32,18 @@ export default class Posts extends Component {
                             // no specific reason to sue boolean value
         alert("Successfully posted!")
     }
-    handleChange(event) {
+    handleChangePostContect (event) {
         this.setState({ postContent: event.target.value })
     }    
+    
+    handleChangeSearchContect (event) {
+        this.setState({ SearchInput: event.target.value })
+        const fPosts = this.state.allPosts.filter( post =>{
+            return post.content.toLowerCase().includes(event.target.value.toLowerCase())
+        })
+        this.setState({ filteredPosts:fPosts});
+    }
+    
     // function name identified by React, do not change
     componentWillReceiveProps(props) {
         this.setState({ 
@@ -44,14 +56,19 @@ export default class Posts extends Component {
                 allPosts.push({content: snap.val().content, id: snap.key, uid: snap.val().uid});
             });
             this.setState({ allPosts: allPosts});
+            this.setState({ filteredPosts: allPosts});
         })
     }    
     render(){
         return (
             <div>
                 <h3>Posts</h3>
+                <label>Search for post content</label><br/>
+                    <textarea value={this.state.SearchInput}
+                                onChange={this.handleChangeSearchContect}
+                    /><br/>
                 <ul>
-                    {this.state.allPosts.map(post => {
+                    {this.state.filteredPosts.map(post => {
                         const trial = "profile"
                         return (
                             <div>
