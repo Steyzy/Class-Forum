@@ -1,7 +1,11 @@
 import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
+import { Link, Route, useLocation } from 'react-router-dom';
+import Profile from "../../pages/Profile.js";
+
 
 export default class Posts extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +41,7 @@ export default class Posts extends Component {
         db.ref('posts/' + this.state.currForum).on('value', snapshot => {
             let allPosts = [];
             snapshot.forEach(snap => {
-                allPosts.push({content: snap.val().content, id: snap.key});
+                allPosts.push({content: snap.val().content, id: snap.key, uid: snap.val().uid});
             });
             this.setState({ allPosts: allPosts});
         })
@@ -48,9 +52,20 @@ export default class Posts extends Component {
                 <h3>Posts</h3>
                 <ul>
                     {this.state.allPosts.map(post => {
+                        const trial = "profile"
                         return (
                             <div>
-                                <li key={post.id}>{post.content}</li>
+                                <li key={post.id}>{`${post.content} by `}
+                                    <Link to={
+                                        {
+                                            pathname: '/profile',
+                                            state: {
+                                                uid: post.uid
+                                            }
+                                        }
+                                    }>
+                                    {post.uid}</Link>
+                                </li>
                                 <br/>
                             </div>
                         )
