@@ -12,31 +12,47 @@ export default class Posts extends Component {
             currForum: this.props.currForum,
             allPosts: [],
             filteredPosts:[],
+            postName:'',
             postContent: '',
             SearchInput: '',
         }
         this.handlePost = this.handlePost.bind(this);
-        this.handleChangePostContect = this.handleChangePostContect.bind(this);
-        this.handleChangeSearchContect = this.handleChangeSearchContect.bind(this);
+        this.handleChangePostContent = this.handleChangePostContent.bind(this);
+        this.handleChangeSearchContent = this.handleChangeSearchContent.bind(this);
+        this.handleChangePostName = this.handleChangePostName.bind(this);
     }
-    handlePost(event) {        
-        console.log(this.state.currForum)
+    
+    handlePost(event) {    
+        alert(this.state.postContent);
+        if(this.state.postName.trim() == '' || this.state.postContent.trim() == '')
+        {
+            alert("Name and content must be none-empty.")
+            return
+        }
+        
         const uid = auth().currentUser.uid;
         const postId = db.ref('/posts/' + this.state.currForum).push().key;
         db.ref('/posts/' + this.state.currForum + '/' + postId).set({
             uid: uid,
+            name : this.state.postName,
             content: this.state.postContent,
+            comments: [],
         });
         db.ref('users/' + uid + '/posts/' + postId).set({
             value: true})   // The value is just to keep the node there. There's 
                             // no specific reason to sue boolean value
         alert("Successfully posted!")
     }
-    handleChangePostContect (event) {
+    
+    handleChangePostContent (event) {
         this.setState({ postContent: event.target.value })
     }    
     
-    handleChangeSearchContect (event) {
+    handleChangePostName (event) {
+        this.setState({ postName: event.target.value})
+    } 
+    
+    handleChangeSearchContent (event) {
         this.setState({ SearchInput: event.target.value })
         const fPosts = this.state.allPosts.filter( post =>{
             return post.content.toLowerCase().includes(event.target.value.toLowerCase())
@@ -48,12 +64,16 @@ export default class Posts extends Component {
     componentWillReceiveProps(props) {
         this.setState({ 
             currForum: props.currForum, 
+            postName:'',
             postContent: '', // needed to clear the textarea after switching forum
         })
         db.ref('posts/' + this.state.currForum).on('value', snapshot => {
             let allPosts = [];
             snapshot.forEach(snap => {
-                allPosts.push({content: snap.val().content, id: snap.key, uid: snap.val().uid});
+                allPosts.push({ name:snap.val().name,
+                                content: snap.val().content, 
+                                id: snap.key, uid: 
+                                snap.val().uid});
             });
             this.setState({ allPosts: allPosts});
             this.setState({ filteredPosts: allPosts});
@@ -72,7 +92,7 @@ export default class Posts extends Component {
                         const trial = "profile"
                         return (
                             <div>
-                                <li key={post.id}>{`${post.content} by `}
+                                <li key={post.id}>{`${post.name} by `}
                                     <Link to={
                                         {
                                             pathname: '/profile',
@@ -90,8 +110,13 @@ export default class Posts extends Component {
                 </ul>
                 <form onSubmit={this.handlePost}>
                     <label>Post something</label><br/>
+                    <label>Post Name</label><br/>
+                    <textarea value = {this.state.postName} 
+                               onChange={this.handleChangePostName}  />
+                    <br/>
+                    <label>Post Content</label><br/>
                     <textarea value={this.state.postContent}
-                                onChange={this.handleChange}
+                                onChange={this.handleChangePostContent}
                     /><br/>
                     <input type="submit" value="Post"></input>   
                 </form>            
