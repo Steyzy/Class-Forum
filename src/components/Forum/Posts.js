@@ -34,6 +34,7 @@ export default class Posts extends Component {
         const uid = auth().currentUser.uid;
         const postId = db.ref('/posts/' + this.state.currForum).push().key;
         db.ref('/posts/' + this.state.currForum + '/' + postId).set({
+            // poster: db.ref(`/users/${ uid}/profile/`).push().name,
             uid: uid,
             name : this.state.postName,
             content: this.state.postContent,

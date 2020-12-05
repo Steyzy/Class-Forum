@@ -31,7 +31,8 @@ export default class Profile extends Component {
     }
 
     render() {
-        return (
+    	if(this.state.uid === auth().currentUser.uid){
+    		return (
             <div>
                 <Navbar loggedIn={true} />    
                 <h1>User Profile</h1>
@@ -42,5 +43,18 @@ export default class Profile extends Component {
                 <Link to="/edit">Edit Profile</Link>
             </div>
         )
+    	}
+    	else {
+    		return (
+            <div>
+                <Navbar loggedIn={true} />    
+                <h1>User Profile</h1>
+                <p>Name: {this.state.name} </p>
+                <p>Major: {this.state.major} </p>
+                <p>Year: {this.state.year} </p>
+                <p>Nationality: {this.state.nationality} </p>
+            </div>
+        )
+    	}
     }
 }
