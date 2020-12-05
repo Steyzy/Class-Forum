@@ -15,15 +15,16 @@ export default class Posts extends Component {
             postName:'',
             postContent: '',
             SearchInput: '',
+            searchOption:0,
         }
         this.handlePost = this.handlePost.bind(this);
         this.handleChangePostContent = this.handleChangePostContent.bind(this);
         this.handleChangeSearchContent = this.handleChangeSearchContent.bind(this);
         this.handleChangePostName = this.handleChangePostName.bind(this);
+        this.handleChangeSearchOption = this.handleChangeSearchOption.bind(this);
     }
     
     handlePost(event) {    
-        alert(this.state.postContent);
         if(this.state.postName.trim() == '' || this.state.postContent.trim() == '')
         {
             alert("Name and content must be none-empty.")
@@ -44,6 +45,24 @@ export default class Posts extends Component {
         alert("Successfully posted!")
     }
     
+    handleChangeSearchOption(event)
+    {
+        switch (event.target.value)
+        {
+            case 'Post Name':
+                this.setState({searchOption: 1})
+                return;
+            case 'Content':
+                this.setState({searchOption: 2})
+                return;
+            case 'User Name':
+                this.setState({searchOption: 3})
+                return;
+            default:
+                return;
+        }
+    }
+    
     handleChangePostContent (event) {
         this.setState({ postContent: event.target.value })
     }    
@@ -54,16 +73,34 @@ export default class Posts extends Component {
     
     handleChangeSearchContent (event) {
         this.setState({ SearchInput: event.target.value })
-        const fPosts = this.state.allPosts.filter( post =>{
-            return post.content.toLowerCase().includes(event.target.value.toLowerCase())
-        })
-        this.setState({ filteredPosts:fPosts});
+        let filteredPosts = [];
+        switch (this.state.searchOption)
+        {
+            case 1:
+              filteredPosts = this.state.allPosts.filter( post =>{
+                    return post.name.toLowerCase().includes(event.target.value.toLowerCase())
+                    })
+                break;
+            case 2:
+               filteredPosts = this.state.allPosts.filter( post =>{
+                    return post.content.toLowerCase().includes(event.target.value.toLowerCase())
+                    })
+                break;
+                
+                // this is where to add enable name search case 3
+                
+                
+            default:
+               filteredPosts = this.state.allPosts;
+        }
+        this.setState({ filteredPosts:filteredPosts});
     }
     
     // function name identified by React, do not change
     componentWillReceiveProps(props) {
         this.setState({ 
             currForum: props.currForum, 
+            SearchInput:'',
             postName:'',
             postContent: '', // needed to clear the textarea after switching forum
         })
@@ -83,16 +120,27 @@ export default class Posts extends Component {
         return (
             <div>
                 <h3>Posts</h3>
-                <label>Search for post content</label><br/>
-                    <textarea value={this.state.SearchInput}
-                                onChange={this.handleChangeSearchContect}
-                    /><br/>
+                <label>Search for post</label>
+                <br/>
+                <select onChange={this.handleChangeSearchOption}>
+                    <option defaultValue="" disabled selected hidden>Select way of searching</option>
+					<option>Post Name</option>
+					<option>Content</option>
+					<option>User Name</option>
+                </select>
+                <br/>
+                <textarea value={this.state.SearchInput}
+                                onChange={this.handleChangeSearchContent}/><br/>
                 <ul>
                     {this.state.filteredPosts.map(post => {
                         const trial = "profile"
                         return (
                             <div>
-                                <li key={post.id}>{`${post.name} by `}
+                                <li key={post.id}>
+                                <a href="#" onClick={this.props.onClick}>
+                                        {post.name}
+                                </a>  
+                                { ` by `}
                                     <Link to={
                                         {
                                             pathname: '/profile',
@@ -103,6 +151,7 @@ export default class Posts extends Component {
                                     }>
                                     {post.uid}</Link>
                                 </li>
+                                <li> {post.content}</li>
                                 <br/>
                             </div>
                         )
