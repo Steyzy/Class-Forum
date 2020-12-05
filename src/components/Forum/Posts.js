@@ -133,7 +133,6 @@ export default class Posts extends Component {
                                 onChange={this.handleChangeSearchContent}/><br/>
                 <ul>
                     {this.state.filteredPosts.map(post => {
-                        const trial = "profile"
                         return (
                             <div>
                                 <li key={post.id}>
@@ -142,12 +141,7 @@ export default class Posts extends Component {
                                 </a>  
                                 { ` by `}
                                     <Link to={
-                                        {
-                                            pathname: '/profile',
-                                            state: {
-                                                uid: post.uid
-                                            }
-                                        }
+                                        {pathname: `/profile/${post.uid}`}
                                     }>
                                     {post.uid}</Link>
                                 </li>

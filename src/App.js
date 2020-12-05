@@ -86,7 +86,7 @@ class App extends Component {
               component={Forum}
             />
             <PrivateRoute
-              path="/profile"
+              exact path="/profile"
               authenticated={this.state.authenticated}
               component={Profile}
             />            
@@ -104,6 +104,11 @@ class App extends Component {
               path="/edit"
               authenticated={this.state.authenticated}
               component={Edit}
+            />
+            <PrivateRoute
+              path="/profile/:uid"
+              authenticated={this.state.authenticated}
+              component={Profile}
             />
           </Switch>
         </Router>
