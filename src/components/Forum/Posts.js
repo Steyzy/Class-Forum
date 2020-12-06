@@ -13,6 +13,7 @@ export default class Posts extends Component {
             allPosts: [],
             filteredPosts:[],
             postName:'',
+            poster:'some',
             postContent: '',
             SearchInput: '',
             searchOption:0,
@@ -35,8 +36,8 @@ export default class Posts extends Component {
         const uid = auth().currentUser.uid;
         const postId = db.ref('/posts/' + this.state.currForum).push().key;
         db.ref('/posts/' + this.state.currForum + '/' + postId).set({
-            // poster: db.ref(`/users/${ uid}/profile/`).push().name,
             uid: uid,
+            poster: this.state.poster,
             name : this.state.postName,
             content: this.state.postContent,
         });
@@ -48,6 +49,7 @@ export default class Posts extends Component {
         const firstcommentId = db.ref('allposts/' + postId).push().key;
         db.ref('allposts/'+postId+'/'+firstcommentId).set({
             uid:uid,
+            poster: this.state.poster,
             content:this.state.postContent,
         })
         alert("Successfully posted!")
@@ -72,6 +74,13 @@ export default class Posts extends Component {
     }
     
     handleChangePostContent (event) {
+        db.ref('/users/'+auth().currentUser.uid+'/profile/').on('value', snapshot => {
+            if (snapshot.val() !== null){
+                this.setState({
+                    poster: snapshot.val().name
+                })
+            }
+        });
         this.setState({ postContent: event.target.value })
     }    
     
@@ -95,8 +104,11 @@ export default class Posts extends Component {
                     })
                 break;
                 
-                // this is where to add enable name search case 3
-                
+            case 3:
+               filteredPosts = this.state.allPosts.filter( post =>{
+                    return post.poster.toLowerCase().includes(event.target.value.toLowerCase())
+                    })
+                break;
                 
             default:
                filteredPosts = this.state.allPosts;
@@ -122,7 +134,8 @@ export default class Posts extends Component {
                 allPosts.push({ name:snap.val().name,
                                 content: snap.val().content, 
                                 id: snap.key, 
-                                uid: snap.val().uid});
+                                uid: snap.val().uid,
+                                poster:snap.val().poster});
             });
             this.setState({ allPosts: allPosts});
             this.setState({ filteredPosts: allPosts});
@@ -155,7 +168,7 @@ export default class Posts extends Component {
                                     <Link to={
                                         {pathname: `/profile/${post.uid}`}
                                     }>
-                                    {post.uid}</Link>
+                                    {post.poster}</Link>
                                 </li>
                                 <li> {post.content}</li>
                                 <br/>
