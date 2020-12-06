@@ -22,6 +22,7 @@ export default class Posts extends Component {
         this.handleChangeSearchContent = this.handleChangeSearchContent.bind(this);
         this.handleChangePostName = this.handleChangePostName.bind(this);
         this.handleChangeSearchOption = this.handleChangeSearchOption.bind(this);
+        this.handlePostSwitch =this.handlePostSwitch.bind(this);
     }
     
     handlePost(event) {    
@@ -38,11 +39,17 @@ export default class Posts extends Component {
             uid: uid,
             name : this.state.postName,
             content: this.state.postContent,
-            comments: [],
         });
         db.ref('users/' + uid + '/posts/' + postId).set({
             value: true})   // The value is just to keep the node there. There's 
                             // no specific reason to sue boolean value
+        db.ref('allposts/' + postId).set({
+            name: this.state.postName})
+        const firstcommentId = db.ref('allposts/' + postId).push().key;
+        db.ref('allposts/'+postId+'/'+firstcommentId).set({
+            uid:uid,
+            content:this.state.postContent,
+        })
         alert("Successfully posted!")
     }
     
@@ -97,6 +104,10 @@ export default class Posts extends Component {
         this.setState({ filteredPosts:filteredPosts});
     }
     
+    handlePostSwitch(event){
+        this.props.handlePostSwitch({name: event.target.name});
+    }
+    
     // function name identified by React, do not change
     componentWillReceiveProps(props) {
         this.setState({ 
@@ -110,8 +121,8 @@ export default class Posts extends Component {
             snapshot.forEach(snap => {
                 allPosts.push({ name:snap.val().name,
                                 content: snap.val().content, 
-                                id: snap.key, uid: 
-                                snap.val().uid});
+                                id: snap.key, 
+                                uid: snap.val().uid});
             });
             this.setState({ allPosts: allPosts});
             this.setState({ filteredPosts: allPosts});
@@ -137,7 +148,7 @@ export default class Posts extends Component {
                         return (
                             <div>
                                 <li key={post.id}>
-                                <a href="#" onClick={this.props.onClick}>
+                                <a href="#" name={post.id} onClick={this.handlePostSwitch}>
                                         {post.name}
                                 </a>  
                                 { ` by `}
