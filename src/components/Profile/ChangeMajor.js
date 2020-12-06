@@ -6,12 +6,14 @@ export default class ChangeMajor extends Component {
         super(props);
         this.state = {
             infoAttribute: "major",
-            allInfo: [],
-            infoContent: '',
+            //allInfo: [],
+            infoContent: props.infoContent? props.infoContent : ''
         }
+        console.log(this.props)
         this.handleProfileChange = this.handleProfileChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
+    
     handleProfileChange(event) {        
         event.preventDefault();
         const uid = auth().currentUser.uid;
@@ -38,6 +40,7 @@ export default class ChangeMajor extends Component {
     }    
     // function name identified by React, do not change
     
+    /*
     componentWillReceiveProps(props) {
         const uid = auth().currentUser.uid;
         this.setState({ 
@@ -52,6 +55,7 @@ export default class ChangeMajor extends Component {
             this.setState({ allInfo: allInfo});
         })
     }
+    */
     
         
     render(){

@@ -7,7 +7,7 @@ export default class ChangeYear extends Component {
         this.state = {
             infoAttribute: "year",
             allInfo: [],
-            infoContent: '',
+            infoContent:  this.props.infoContent? this.props.infoContent : '',
         }
         this.handleProfileChange = this.handleProfileChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
