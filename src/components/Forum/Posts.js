@@ -13,6 +13,7 @@ export default class Posts extends Component {
             allPosts: [],
             filteredPosts:[],
             postName:'',
+            poster:'some',
             postContent: '',
             SearchInput: '',
             searchOption:0,
@@ -22,6 +23,7 @@ export default class Posts extends Component {
         this.handleChangeSearchContent = this.handleChangeSearchContent.bind(this);
         this.handleChangePostName = this.handleChangePostName.bind(this);
         this.handleChangeSearchOption = this.handleChangeSearchOption.bind(this);
+        this.handlePostSwitch =this.handlePostSwitch.bind(this);
     }
     
     handlePost(event) {    
@@ -34,15 +36,22 @@ export default class Posts extends Component {
         const uid = auth().currentUser.uid;
         const postId = db.ref('/posts/' + this.state.currForum).push().key;
         db.ref('/posts/' + this.state.currForum + '/' + postId).set({
-            // poster: db.ref(`/users/${ uid}/profile/`).push().name,
             uid: uid,
+            poster: this.state.poster,
             name : this.state.postName,
             content: this.state.postContent,
-            comments: [],
         });
         db.ref('users/' + uid + '/posts/' + postId).set({
             value: true})   // The value is just to keep the node there. There's 
                             // no specific reason to sue boolean value
+        db.ref('allposts/' + postId).set({
+            name: this.state.postName})
+        const firstcommentId = db.ref('allposts/' + postId).push().key;
+        db.ref('allposts/'+postId+'/'+firstcommentId).set({
+            uid:uid,
+            poster: this.state.poster,
+            content:this.state.postContent,
+        })
         alert("Successfully posted!")
     }
     
@@ -88,13 +97,20 @@ export default class Posts extends Component {
                     })
                 break;
                 
-                // this is where to add enable name search case 3
-                
+            case 3:
+               filteredPosts = this.state.allPosts.filter( post =>{
+                    return post.poster.toLowerCase().includes(event.target.value.toLowerCase())
+                    })
+                break;
                 
             default:
                filteredPosts = this.state.allPosts;
         }
         this.setState({ filteredPosts:filteredPosts});
+    }
+    
+    handlePostSwitch(event){
+        this.props.handlePostSwitch({name: event.target.name});
     }
     
     // function name identified by React, do not change
@@ -105,18 +121,28 @@ export default class Posts extends Component {
             postName:'',
             postContent: '', // needed to clear the textarea after switching forum
         })
+        
+        const uid = auth().currentUser.uid;
+        db.ref('/users/'+uid+'/profile').once('value', (snapshot) => {
+          if(snapshot.val() != null){
+                this.setState({ poster: snapshot.val().name })
+          }
+        });
+        
         db.ref('posts/' + this.state.currForum).on('value', snapshot => {
             let allPosts = [];
             snapshot.forEach(snap => {
                 allPosts.push({ name:snap.val().name,
                                 content: snap.val().content, 
-                                id: snap.key, uid: 
-                                snap.val().uid});
+                                id: snap.key, 
+                                uid: snap.val().uid,
+                                poster:snap.val().poster});
             });
             this.setState({ allPosts: allPosts});
             this.setState({ filteredPosts: allPosts});
         })
     }    
+    
     render(){
         return (
             <div>
@@ -137,14 +163,14 @@ export default class Posts extends Component {
                         return (
                             <div>
                                 <li key={post.id}>
-                                <a href="#" onClick={this.props.onClick}>
+                                <a href="#" name={post.id} onClick={this.handlePostSwitch}>
                                         {post.name}
                                 </a>  
                                 { ` by `}
                                     <Link to={
                                         {pathname: `/profile/${post.uid}`}
                                     }>
-                                    {post.uid}</Link>
+                                    {post.poster}</Link>
                                 </li>
                                 <li> {post.content}</li>
                                 <br/>

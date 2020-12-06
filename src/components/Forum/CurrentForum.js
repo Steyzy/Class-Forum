@@ -8,11 +8,19 @@ export default class CurrentForum extends Component {
         super(props);
         this.state = {
             currForum: this.props.currForum,
+            currPostId:'',
         }
+        this.handlePostSwitch = this.handlePostSwitch.bind(this);
     }
+  
     // function name identified by React, do not change
     componentWillReceiveProps(props) {
         this.setState({ currForum: props.currForum })
+    }
+    
+    handlePostSwitch(props)
+    {   
+        this.props.handlePostSwitch({name:props.name});
     }
     
     render() {
@@ -22,7 +30,8 @@ export default class CurrentForum extends Component {
                 {this.state.currForum == '' ?
                     <p>Choose a forum to view</p>
                     :
-                    <Posts currForum={this.state.currForum}/>                    
+                    <Posts currForum={this.state.currForum}
+                            handlePostSwitch={this.handlePostSwitch}/>                    
                 }
             </div>
         )
