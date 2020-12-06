@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
 import Posts from './Posts';
-
+import '../../Styling/Forum.css'
 
 export default class CurrentForum extends Component {
     constructor(props) {
@@ -14,6 +14,7 @@ export default class CurrentForum extends Component {
     componentWillReceiveProps(props) {
         this.setState({ currForum: props.currForum })
     }
+    
     render() {
         return (
             <div>

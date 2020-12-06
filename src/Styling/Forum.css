@@ -54,7 +54,7 @@ section{
   
   .left,
   .middle{
-    height: 250px;
+    height: 200px;
     width: 650px;
     background-color: #f1f1f1;
     margin-left: 50px;
@@ -74,7 +74,7 @@ section{
   /* Style the right column */
   .right {
     grid-area: right;
-    height: 500px;
+    height: 410px;
     width: 500px;
     background-color: #f1f1f1;
   }
@@ -82,8 +82,9 @@ section{
   /* Style the footer */
   .footer {
     grid-area: footer;
-    background-color: #f1f1f1;
+    background-color: rgb(232, 239, 248);
     text-align: center;
+    margin-top: 10px;
   }
 
 input{

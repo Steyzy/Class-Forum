@@ -12,6 +12,7 @@ import Forum from "./pages/Forum";
 import Profile from "./pages/Profile";
 import Edit from "./pages/Edit";
 import { auth } from "./services/firebase";
+import CurrentForum from "./components/Forum/CurrentForum";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
   return (

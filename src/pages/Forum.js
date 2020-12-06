@@ -32,9 +32,8 @@ export default class Forum extends Component {
         <div className='left'><AddForumForm/></div>
         <div className='middle'><ListForums/></div>
         <div className='right'><JoinedForums onClick={this.handleForumSwitch}/></div>             
-        <div className='footer'></div>
+        <div className='footer'><CurrentForum currForum={this.state.currForum}/></div>
       </div>
     );
   }
 }
-/*<CurrentForum currForum={this.state.currForum}/>       */
