@@ -1,45 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { signup } from "../helpers/auth";
-import styled from 'styled-components';
+import '../Styling/Home.css'
 
-const Title = styled.h1`
-  font-size: 2.5em;
-  text-align: center; 
-  background: #d9f2ff;
-  padding: 0.5em;
-  margin: 0;
-  color: deepgrey;
-`
-const Wrapper = styled.section`
-  padding-top: 0.5em;
-  padding-bottom: 1em;
-  background: papayawhip;
-  text-align: center;
-  margin: 0;
-`
-const Words = styled.p`
-  text-align: center;
-  font-size: 1em;
-  text-decoration: none;
-`
-const Typein = styled.input`
-  padding: 0.5em;
-  text-align: left-aligned;
-  font-size: 1em;
-  margin: 0.25em
-`
-const Button = styled.button`
-  background: white;
-  color: palevioletred;
-  font-size: 1.1em;
-  margin-top: 1em;
-  margin-bottom: 2em;
-  padding: 0.5em 1.25em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  text-decoration: none;
-`
 
 export default class SignUp extends Component {
 
@@ -76,6 +39,29 @@ export default class SignUp extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <h1>
+            Sign Up to <Link to="/">Forum</Link>
+          </h1>
+          <section className='smallPadding'>
+          <p className='smallMargin'>Fill in the form below to create an account.</p>
+          <div>
+            <input placeholder="Email" name="email" type="email" 
+              onChange={this.handleChange} value={this.state.email}></input>
+          </div>
+          <div>
+            <input placeholder="Password" name="password" 
+              onChange={this.handleChange} value={this.state.password} type="password"></input>
+          </div>
+          <div>
+            {this.state.error ? <p>{this.state.error}</p> : null}
+            <button type="submit" className='button'>Sign up</button>
+          </div>
+          <p className='smallMargin'>Already have an account? <Link to="/login">Login</Link></p>
+          </section>
+        </form>
+      </div>
+      /*<div>
+        <form onSubmit={this.handleSubmit}>
           <Title>
             Sign Up to <Words as='a' href="/" font-size='2.5em'>Forum</Words>
           </Title>
@@ -96,7 +82,7 @@ export default class SignUp extends Component {
           <Words>Already have an account? <Link to="/login">Login</Link></Words>
           </Wrapper>
         </form>
-      </div>
+      </div>*/
     )
   }
 }

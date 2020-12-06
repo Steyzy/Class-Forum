@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
+import '../../Styling/Forum.css'
 
 export default class ListForums extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ export default class ListForums extends Component {
                 <h2>Join A Forum</h2>
                 <form onSubmit={this.handleSubmit}>
                     <select onChange={this.handleChange}>
-                    <option defaultValue="" disabled selected hidden>Select a forum to join</option>
+                    <option defaultValue="" disabled selected hidden>Choose a forum to join</option>
                         {this.state.forums.map(forum => {
                             return (
                                 <option key={forum.id} my_key={forum.id}>
@@ -50,7 +51,7 @@ export default class ListForums extends Component {
                             )
                         })}
                     </select>
-                    <input type="submit" />
+                    <button type="submit" className='button submit'>Submit</button>
                 </form>
             </div>
         )

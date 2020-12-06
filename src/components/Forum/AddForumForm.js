@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
-
+import '../../Styling/Forum.css'
 
 
 export default class AddForumForm extends Component {
@@ -31,7 +31,7 @@ export default class AddForumForm extends Component {
             <p>Enter the name of the course you want to add:</p>
             <input type="text" name="name" onChange={this.handleChange} 
                     placeholder="Enter course name" />
-            <input type="submit" />
+            <button type="submit" className='button submit'>Submit</button>
           </form>
         </div>
       )

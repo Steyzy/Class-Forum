@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
+import '../../Styling/Forum.css'
 
 export default class JoinedForums extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class JoinedForums extends Component {
         return (
             <div>
                 <h2>Your Forums</h2>
-                <label>Click a forum to view posts there</label><br/>
+                <p>Click a forum to view posts there</p><br/>
                 <ul>
                     {this.state.forums.map(forum => {
                         return (

@@ -4,6 +4,7 @@ import AddForumForm from '../components/Forum/AddForumForm';
 import ListForums from '../components/Forum/ListForums';
 import JoinedForums from '../components/Forum/JoinedForums';
 import CurrentForum from '../components/Forum/CurrentForum';
+import '../Styling/Forum.css'
 
 
 export default class Forum extends Component {
@@ -21,18 +22,19 @@ export default class Forum extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Forum</h1>
-        <Navbar loggedIn={true}/>
-        <hr/>
-        <AddForumForm/>
-        <hr/>
-        <ListForums/>
-        <hr/>
-        <JoinedForums onClick={this.handleForumSwitch}/>
-        <hr/>
-        <CurrentForum currForum={this.state.currForum}/>
+      <div className='grid-container'>
+        <div className='header'>
+          <h1>Forum</h1>
+        </div>
+        <div className='header2'>
+          <section><Navbar loggedIn={true}/></section>
+        </div>
+        <div className='left'><AddForumForm/></div>
+        <div className='middle'><ListForums/></div>
+        <div className='right'><JoinedForums onClick={this.handleForumSwitch}/></div>             
+        <div className='footer'></div>
       </div>
     );
   }
 }
+/*<CurrentForum currForum={this.state.currForum}/>       */
