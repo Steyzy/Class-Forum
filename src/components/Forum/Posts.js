@@ -74,13 +74,6 @@ export default class Posts extends Component {
     }
     
     handleChangePostContent (event) {
-        db.ref('/users/'+auth().currentUser.uid+'/profile/').on('value', snapshot => {
-            if (snapshot.val() !== null){
-                this.setState({
-                    poster: snapshot.val().name
-                })
-            }
-        });
         this.setState({ postContent: event.target.value })
     }    
     
@@ -128,6 +121,14 @@ export default class Posts extends Component {
             postName:'',
             postContent: '', // needed to clear the textarea after switching forum
         })
+        
+        const uid = auth().currentUser.uid;
+        db.ref('/users/'+uid+'/profile').once('value', (snapshot) => {
+          if(snapshot.val() != null){
+                this.setState({ poster: snapshot.val().name })
+          }
+        });
+        
         db.ref('posts/' + this.state.currForum).on('value', snapshot => {
             let allPosts = [];
             snapshot.forEach(snap => {
@@ -141,6 +142,7 @@ export default class Posts extends Component {
             this.setState({ filteredPosts: allPosts});
         })
     }    
+    
     render(){
         return (
             <div>
