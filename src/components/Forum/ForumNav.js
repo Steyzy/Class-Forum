@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import { logout } from "../../helpers/auth"
 
 export default class ForumNav extends Component {
     render() {
@@ -14,7 +14,7 @@ export default class ForumNav extends Component {
                         <a href="/profile" class="nav-link">Profile</a>
                     </li>
                     <li>
-                        <a href="/logout" class="nav-link">Log Out</a>
+                        <a onClick={logout} class="nav-link">Log Out</a>
                     </li>
                 </ul>
             </nav>
