@@ -7,6 +7,7 @@ export default class JoinedForums extends Component {
         super(props);
         this.state = {
             forums: [],
+            selectedName: 0,
         }
     }
     componentDidMount() {
@@ -21,22 +22,20 @@ export default class JoinedForums extends Component {
     render() {        
         return (
             <div>
-                <h2>Your Forums</h2>
-                <p>Click a forum to view posts there</p><br/>
-                <ul>
-                    {this.state.forums.map(forum => {
-                        return (
-                            <div>
-                                <li key={forum.id}>
-                                    <a href="#" onClick={this.props.onClick}>
-                                        {forum.name}
-                                    </a>    
-                                </li>
-                                <br/>
-                            </div>
-                        )
-                    })}
-                </ul>
+                <h2>View a Forum</h2>
+                <p>Choose a forums that you have joined</p><br/>
+                <form>
+                    <select onChange={this.props.onChange}>
+                        <option defaultValue="" disabled selected hidden>Choose a forum to view</option>
+                        {this.state.forums.map(forum => {
+                            return (
+                                <option key={forum.id} my_key={forum.name}>
+                                    {forum.name}
+                                </option>
+                            )
+                        })}                        
+                    </select>
+                </form>
             </div>
         )
     }
