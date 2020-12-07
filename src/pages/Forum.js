@@ -7,6 +7,7 @@ import CurrentForum from '../components/Forum/CurrentForum';
 import '../Styling/Forum.css'
 import CurrentPost from '../components/Forum/CurrentPost';
 import ForumNav from '../components/Forum/ForumNav';
+import ForumAccordion from '../components/Forum/ForumAccordion';
 
 export default class Forum extends Component {
   constructor() {
@@ -36,39 +37,8 @@ export default class Forum extends Component {
     return (
       <div>
         <ForumNav/>
-        <p>
-          <a class="btn btn-primary" data-toggle="collapse" href="#addForum"
-          role="button" aria-expanded="false" aria-controls="addForum">
-            Create a Forum
-          </a>
-          <a class="btn btn-primary" data-toggle="collapse" href="#joinedForums"
-          role="button" aria-expanded="false" aria-controls="joinedForums">
-            View a Forum
-          </a>
-          <a class="btn btn-primary" data-toggle="collapse" href="#listForum"
-          role="button" aria-expanded="false" aria-controls="listForum">
-            Join a Forum
-          </a>
-        </p>
+        <ForumAccordion handleChange={this.handleForumSwitch}/>
         <div className='grid-container'>
-          <div class="container">
-            <div class="row collapse" id="addForum">
-              <div className='left'>
-                <AddForumForm/>
-              </div> 
-            </div>
-            <div class="row collapse" id="listForum">
-              <div className='left'>
-                <ListForums/>
-              </div>        
-            </div>      
-            <div class="row collapse" id="joinedForums">
-              <div className='left'>
-                <JoinedForums onChange={this.handleForumSwitch}/>
-            </div>
-              {/* </div> */}
-            </div>
-          </div>
           <div className='footer'><CurrentForum currForum={this.state.currForum}
                                                 handlePostSwitch={this.handlePostSwitch}/></div>
           <CurrentPost currPostId = {this.state.currPostId}/>         
