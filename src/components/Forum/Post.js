@@ -18,6 +18,7 @@ export default class Post extends Component {
         }
         this.handleComment = this.handleComment.bind(this);
         this.handleChangeComment = this.handleChangeComment.bind(this);
+        this.handleDel = this.handleDel.bind(this);
     }
     
    handleComment(event) {   
@@ -34,13 +35,21 @@ export default class Post extends Component {
             content:this.state.commentContent,
             poster: this.state.poster,
         });
-        db.ref('users/' + uid + '/comments/' + commentId).set({
-            value: true})   // The value is just to keep the node there. There's 
-                            // no specific reason to sue boolean value
         alert("Successfully commented!")
     }
     
-   
+    handleDel(event)
+    {
+        const uid = auth().currentUser.uid
+        alert(event.target.id)
+        if(uid == event.target.name)
+        {
+            db.ref('/allposts/'+this.state.currPostId+'/'+event.target.id).remove()
+            alert("Well, I guess sometimes humans just want to take back their words...")
+            return
+        }
+        alert("Sorry, You can't delete other's post.")
+    }
     
   handleChangeComment (event) {
         this.setState({ commentContent: event.target.value })
@@ -69,6 +78,7 @@ export default class Post extends Component {
             let allComments = [];
             snapshot.forEach(snap => {
                 allComments.push({
+                                id:snap.key,
                                 content: snap.val().content,
                                 uid:snap.val().uid,
                                 poster:snap.val().poster});
@@ -96,6 +106,10 @@ export default class Post extends Component {
                                         {pathname: `/profile/${comment.uid}`}
                                     }>
                                     {comment.poster}</Link>
+                                    {"      "}
+                                <a href="#" name={comment.uid} id={comment.id} onClick={this.handleDel}>
+                                        {"⨉"}
+                                </a> 
                                 </li>
                                 <br/>
                             </div>
