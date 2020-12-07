@@ -41,7 +41,6 @@ export default class Post extends Component {
     handleDel(event)
     {
         const uid = auth().currentUser.uid
-        alert(event.target.id)
         if(uid == event.target.name)
         {
             db.ref('/allposts/'+this.state.currPostId+'/'+event.target.id).remove()

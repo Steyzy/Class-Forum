@@ -84,7 +84,7 @@ export default class Posts extends Component {
         const uid = auth().currentUser.uid
         if(uid == event.target.name)
         {
-            db.ref('allPosts/'+event.target.id).remove()
+            db.ref('allposts/'+event.target.id).remove()
             db.ref('/posts/'+this.state.currForum+'/'+event.target.id).remove()
             alert("Well, I guess sometimes humans just want to take back their words...")
             return
