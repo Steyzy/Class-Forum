@@ -1,5 +1,5 @@
 import React, { Component, createElement } from "react"
-import Navbar from '../components/Navbar';
+import ForumNav from '../components/Forum/ForumNav';
 import { Link } from 'react-router-dom';
 import { auth, db } from "../services/firebase.js"
 
@@ -34,7 +34,7 @@ export default class Profile extends Component {
     	if(this.state.uid === auth().currentUser.uid){
     		return (
             <div>
-                <Navbar loggedIn={true} />    
+                <ForumNav />    
                 <h1>User Profile</h1>
                 <p>Name: {this.state.name} </p>
                 <p>Major: {this.state.major} </p>
@@ -47,7 +47,7 @@ export default class Profile extends Component {
     	else {
     		return (
             <div>
-                <Navbar loggedIn={true} />    
+                <ForumNav />    
                 <h1>User Profile</h1>
                 <p>Name: {this.state.name} </p>
                 <p>Major: {this.state.major} </p>

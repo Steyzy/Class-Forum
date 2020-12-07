@@ -46,6 +46,21 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
   );
 }
 
+function SignupRoute({ component: Component, authenticated, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authenticated === false ? (
+          <Component {...props} />
+        ) : (
+            <Redirect to="/edit" />
+          )
+      }
+    />
+  );
+}
+
 class App extends Component {
   constructor() {
     super();
@@ -95,7 +110,7 @@ class App extends Component {
               authenticated={this.state.authenticated}
               component={Profile}
             />            
-            <PublicRoute
+            <SignupRoute
               path="/signup"
               authenticated={this.state.authenticated}
               component={Signup}
