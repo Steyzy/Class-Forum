@@ -42,7 +42,7 @@ export default class ListForums extends Component {
                 <h2>Join A Forum</h2>
                 <form onSubmit={this.handleSubmit}>
                     <select onChange={this.handleChange}>
-                    <option defaultValue="" disabled selected hidden>Choose a forum to join</option>
+                        <option defaultValue="" disabled selected hidden>Choose a forum to join</option>
                         {this.state.forums.map(forum => {
                             return (
                                 <option key={forum.id} my_key={forum.id}>

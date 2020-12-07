@@ -22,7 +22,8 @@ export default class Forum extends Component {
   }
   
   handleForumSwitch(event) {
-    this.setState({ currForum: event.target.textContent,
+    const index = event.target.options.selectedIndex;
+    this.setState({ currForum: event.target.options[index].getAttribute('my_key'),
                     currPostId:''});
   }
   
@@ -42,25 +43,30 @@ export default class Forum extends Component {
           </a>
           <a class="btn btn-primary" data-toggle="collapse" href="#joinedForums"
           role="button" aria-expanded="false" aria-controls="joinedForums">
-            List My Forums
+            View a Forum
           </a>
           <a class="btn btn-primary" data-toggle="collapse" href="#listForum"
           role="button" aria-expanded="false" aria-controls="listForum">
-            List All Forums
+            Join a Forum
           </a>
         </p>
         <div className='grid-container'>
           <div class="container">
-            <div class="row">
-              <div class="col-8">
-                <div class="row collapse" id="addForum" className='left'><AddForumForm/></div>
-                <div class="row collapse" id="listForum" className='middle'><ListForums/></div>
-              </div>
-              <div class="col-4 collapse" id="joinedForums">
-                <div className='right'>
-                  <JoinedForums onClick={this.handleForumSwitch}/>
-                </div>
-              </div>
+            <div class="row collapse" id="addForum">
+              <div className='left'>
+                <AddForumForm/>
+              </div> 
+            </div>
+            <div class="row collapse" id="listForum">
+              <div className='left'>
+                <ListForums/>
+              </div>        
+            </div>      
+            <div class="row collapse" id="joinedForums">
+              <div className='left'>
+                <JoinedForums onChange={this.handleForumSwitch}/>
+            </div>
+              {/* </div> */}
             </div>
           </div>
           <div className='footer'><CurrentForum currForum={this.state.currForum}
