@@ -18,9 +18,10 @@ export default class EditProfile extends Component {
             major:"",
             nationality:"",
             year:"",
+            redirect: false
         }
-        //this.handleProfileChange = this.handleProfileChange.bind(this);
-        //this.handleChange = this.handleChange.bind(this);
+        this.handleProfileChange = this.handleProfileChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
         
 
@@ -28,7 +29,7 @@ export default class EditProfile extends Component {
     componentDidMount() {
         db.ref(`/users/${ this.state.uid }/profile/`).on('value', snapshot => {
             if (snapshot.val() !== null){
-                console.log(snapshot.val().name)
+                //console.log(snapshot.val())
                 this.setState({
                     name: snapshot.val().name,
                     major: snapshot.val().major,
@@ -39,7 +40,7 @@ export default class EditProfile extends Component {
         })
     }
 
-    /*
+    
     handleProfileChange(event) {        
         event.preventDefault();
         const uid = auth().currentUser.uid;
@@ -47,20 +48,41 @@ export default class EditProfile extends Component {
             alert("Name must be none-empty.")
             return
         }
+        //console.log(this.state)
         db.ref('/users/' + uid + '/profile/').update({ 
             name: this.state.name,
+            major: this.state.major,
+            nationality: this.state.nationality,
+            year: this.state.year
         });
+        alert("Successfully saved profile change!")
+        this.setState({
+            redirect: true
+        })
+        //{this.renderRedirect()}
+        //return
 
-        alert("Successfully changed name!")
+
+
     }
+    
 
-    handleChange(event) {
-        const uid = auth().currentUser.uid;
-        console.log("handling change")
-        this.setState({ name: event.target.value })
-        {console.log(this.state.name)}
+    handleChange(event, Attribute) {
+        this.setState({ 
+            [Attribute]: event.target.value 
+        })
+        //{console.log(this.state.name)}
+        //{console.log(this.state.major)}
 
     }    
+    
+    /*
+    renderRedirect(){
+        console.log('renderRedirect reached')
+        if (this.state.redirect) {
+            return <Redirect to='/profile' />
+          }
+    }
     */
 
     render() {
@@ -69,11 +91,34 @@ export default class EditProfile extends Component {
                 <h1>Edit Profile</h1>
                 <Navbar loggedIn={true} />
                 <div>
-                    <ChangeName infoContent={this.state.name} />
-                    <ChangeMajor infoContent={this.state.major}/>
-                    <ChangeNationality infoContent={this.state.nationality} />
-                    <ChangeYear infoContent={this.state.year} />
-                    <Link to='/profile'>Done</Link>
+                    <form onSubmit={this.handleProfileChange}>
+                        <div>
+                            <label>Change name: </label>
+                            <textarea value={this.state.name}
+                                        onChange={(event)=>{this.handleChange(event,'name')}}
+                            /><br/>
+                        </div>
+                        <div>
+                            <label>Change major: </label>
+                            <textarea value={this.state.major}
+                                        onChange={(event) => {this.handleChange(event,'major')}}
+                            /><br/>
+                        </div>
+                        <div>
+                            <label>Change year: </label>
+                            <textarea value={this.state.year}
+                                        onChange={(event) => {this.handleChange(event,'year')}}
+                            /><br/>
+                        </div>
+                        <div>
+                            <label>Change nationality: </label>
+                            <textarea value={this.state.nationality}
+                                        onChange={(event) => {this.handleChange(event,'nationality')}}
+                            /><br/>
+                        </div>
+                        <input type="submit" value="Finish"></input>   
+                    </form>
+                    { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
                 </div>
             </div>
             )
