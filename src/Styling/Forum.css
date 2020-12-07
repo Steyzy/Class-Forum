@@ -14,7 +14,7 @@
 
 h2{
   text-align: center;
-  margin: 1.5em;
+  margin: 1.0em;
 }
 
 p{
@@ -62,7 +62,7 @@ p{
     /* height: 230px;
     width: 450px; */
     background-color: #f1f1f1;
-    margin-left: 50px;
+    /* margin-left: 50px; */
   }
   
   /* Style the left column */
