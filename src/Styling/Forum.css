@@ -1,10 +1,15 @@
-h1{
+/* h1{
     font-size: 40px;
     text-align: center; 
     background: #d9f2ff;
     padding: 0.5em;
     margin: 0;
     color: deepgrey;
+} */
+
+/* Style the navbar */
+.navbar-brand {
+
 }
 
 h2{
@@ -20,7 +25,7 @@ p{
 
 section{
     padding-top: 2em;
-    padding-bottom: 41px;
+    padding-bottom: 31px;
     background: papayawhip;
     text-align: center;
     margin: 0;
@@ -54,7 +59,7 @@ section{
   
   .left,
   .middle{
-    height: 200px;
+    height: 230px;
     width: 650px;
     background-color: #f1f1f1;
     margin-left: 50px;
@@ -74,7 +79,7 @@ section{
   /* Style the right column */
   .right {
     grid-area: right;
-    height: 410px;
+    height: 460px;
     width: 500px;
     background-color: #f1f1f1;
   }

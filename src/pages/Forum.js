@@ -6,6 +6,7 @@ import JoinedForums from '../components/Forum/JoinedForums';
 import CurrentForum from '../components/Forum/CurrentForum';
 import '../Styling/Forum.css'
 import CurrentPost from '../components/Forum/CurrentPost';
+import ForumNav from '../components/Forum/ForumNav';
 
 export default class Forum extends Component {
   constructor() {
@@ -32,19 +33,16 @@ export default class Forum extends Component {
   
   render() {
     return (
-      <div className='grid-container'>
-        <div className='header'>
-          <h1>Forum</h1>
+      <div>
+        <ForumNav/>
+        <div className='grid-container'>
+          <div className='left'><AddForumForm/></div>
+          <div className='middle'><ListForums/></div>
+          <div className='right'><JoinedForums onClick={this.handleForumSwitch}/></div>    
+          <CurrentPost currPostId = {this.state.currPostId}/>         
+          <div className='footer'><CurrentForum currForum={this.state.currForum}
+                                                handlePostSwitch={this.handlePostSwitch}/></div>
         </div>
-        <div className='header2'>
-          <section><Navbar loggedIn={true}/></section>
-        </div>
-        <div className='left'><AddForumForm/></div>
-        <div className='middle'><ListForums/></div>
-        <div className='right'><JoinedForums onClick={this.handleForumSwitch}/></div>    
-        <CurrentPost currPostId = {this.state.currPostId}/>         
-        <div className='footer'><CurrentForum currForum={this.state.currForum}
-                                              handlePostSwitch={this.handlePostSwitch}/></div>
       </div>
     );
   }
