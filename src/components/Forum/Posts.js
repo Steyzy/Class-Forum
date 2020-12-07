@@ -24,6 +24,7 @@ export default class Posts extends Component {
         this.handleChangePostName = this.handleChangePostName.bind(this);
         this.handleChangeSearchOption = this.handleChangeSearchOption.bind(this);
         this.handlePostSwitch =this.handlePostSwitch.bind(this);
+        this.handleDel = this.handleDel.bind(this);
     }
     
     handlePost(event) {    
@@ -41,9 +42,6 @@ export default class Posts extends Component {
             name : this.state.postName,
             content: this.state.postContent,
         });
-        db.ref('users/' + uid + '/posts/' + postId).set({
-            value: true})   // The value is just to keep the node there. There's 
-                            // no specific reason to sue boolean value
         db.ref('allposts/' + postId).set({
             name: this.state.postName})
         const firstcommentId = db.ref('allposts/' + postId).push().key;
@@ -80,6 +78,19 @@ export default class Posts extends Component {
     handleChangePostName (event) {
         this.setState({ postName: event.target.value})
     } 
+    
+    handleDel(event)
+    {
+        const uid = auth().currentUser.uid
+        if(uid == event.target.name)
+        {
+            db.ref('allPosts/'+event.target.id).remove()
+            db.ref('/posts/'+this.state.currForum+'/'+event.target.id).remove()
+            alert("Well, I guess sometimes humans just want to take back their words...")
+            return
+        }
+        alert("Sorry, You can't delete other's post.")
+    }
     
     handleChangeSearchContent (event) {
         this.setState({ SearchInput: event.target.value })
@@ -171,6 +182,10 @@ export default class Posts extends Component {
                                         {pathname: `/profile/${post.uid}`}
                                     }>
                                     {post.poster}</Link>
+                                     {"      "}
+                                <a href="#" name={post.uid} id={post.id}onClick={this.handleDel}>
+                                        {"⨉"}
+                                </a> 
                                 </li>
                                 <li> {post.content}</li>
                                 <br/>
