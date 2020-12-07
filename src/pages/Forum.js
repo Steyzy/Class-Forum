@@ -36,12 +36,20 @@ export default class Forum extends Component {
       <div>
         <ForumNav/>
         <div className='grid-container'>
-          <div className='left'><AddForumForm/></div>
-          <div className='middle'><ListForums/></div>
-          <div className='right'><JoinedForums onClick={this.handleForumSwitch}/></div>    
-          <CurrentPost currPostId = {this.state.currPostId}/>         
+          <div class="container">
+            <div class="row">
+              <div class="col-8">
+                <div class="row" className='left'><AddForumForm/></div>
+                <div class="row" className='middle'><ListForums/></div>
+              </div>
+              <div class="col-4">
+                <div className='right'><JoinedForums onClick={this.handleForumSwitch}/></div>    
+              </div>
+            </div>
+          </div>
           <div className='footer'><CurrentForum currForum={this.state.currForum}
                                                 handlePostSwitch={this.handlePostSwitch}/></div>
+          <CurrentPost currPostId = {this.state.currPostId}/>         
         </div>
       </div>
     );

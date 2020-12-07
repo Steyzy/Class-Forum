@@ -23,13 +23,13 @@ p{
   margin: 0.5em;
 }
 
-section{
+/* section{
     padding-top: 2em;
     padding-bottom: 31px;
     background: papayawhip;
     text-align: center;
     margin: 0;
-}
+} */
 
 /* Style the header */
 .header {
@@ -48,39 +48,39 @@ section{
   }
 
   /* The grid container */
-  .grid-container {
+  /* .grid-container {
     display: grid;
     grid-template-areas: 
       'header header header header header2 header2' 
       'left left right right right right' 
       'middle middle right right right right' 
       'footer footer footer footer footer footer';
-  } 
+  }  */
   
   .left,
   .middle{
-    height: 230px;
-    width: 650px;
+    /* height: 230px;
+    width: 450px; */
     background-color: #f1f1f1;
     margin-left: 50px;
   }
   
   /* Style the left column */
   .left {
-    grid-area: left;
+    /* grid-area: left; */
     margin-bottom: 10px;
   }
   
   /* Style the middle column */
   .middle {
-    grid-area: middle;
+    /* grid-area: middle; */
   }
   
   /* Style the right column */
   .right {
-    grid-area: right;
-    height: 460px;
-    width: 500px;
+    /* grid-area: right; */
+    /* height: 460px; */
+    /* width: 300px; */
     background-color: #f1f1f1;
   }
   
