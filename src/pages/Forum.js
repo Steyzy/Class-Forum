@@ -35,15 +35,31 @@ export default class Forum extends Component {
     return (
       <div>
         <ForumNav/>
+        <p>
+          <a class="btn btn-primary" data-toggle="collapse" href="#addForum"
+          role="button" aria-expanded="false" aria-controls="addForum">
+            Create a Forum
+          </a>
+          <a class="btn btn-primary" data-toggle="collapse" href="#joinedForums"
+          role="button" aria-expanded="false" aria-controls="joinedForums">
+            List My Forums
+          </a>
+          <a class="btn btn-primary" data-toggle="collapse" href="#listForum"
+          role="button" aria-expanded="false" aria-controls="listForum">
+            List All Forums
+          </a>
+        </p>
         <div className='grid-container'>
           <div class="container">
             <div class="row">
               <div class="col-8">
-                <div class="row" className='left'><AddForumForm/></div>
-                <div class="row" className='middle'><ListForums/></div>
+                <div class="row collapse" id="addForum" className='left'><AddForumForm/></div>
+                <div class="row collapse" id="listForum" className='middle'><ListForums/></div>
               </div>
-              <div class="col-4">
-                <div className='right'><JoinedForums onClick={this.handleForumSwitch}/></div>    
+              <div class="col-4 collapse" id="joinedForums">
+                <div className='right'>
+                  <JoinedForums onClick={this.handleForumSwitch}/>
+                </div>
               </div>
             </div>
           </div>
