@@ -16,7 +16,7 @@ export default function ForumAccordion(props) {
     <i class="icon-chevron-right"></i> Create a Forum 
   </button>
 
-  <div class="accordion-group">
+  <div class="accordion-group pb-4 mb-0">
       <div class="collapse" id="join"  data-parent="#myGroup">
         <ListForums/>
       </div>

@@ -18,7 +18,7 @@ export default class CurrentPost extends Component {
     
     render() {
       return (
-            <div>
+            <div style={{textAlign: "center"}}>
                 <h2>Current Post: {this.state.currPost}</h2>
                 {this.state.currPostId == '' ?
                     <p>Choose a post to view</p>

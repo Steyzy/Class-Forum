@@ -38,11 +38,13 @@ export default class Forum extends Component {
       <div>
         <ForumNav/>
         <ForumAccordion handleChange={this.handleForumSwitch}/>
-        <div className='grid-container'>
-          <div className='footer'><CurrentForum currForum={this.state.currForum}
-                                                handlePostSwitch={this.handlePostSwitch}/></div>
-          <CurrentPost currPostId = {this.state.currPostId}/>         
+        <div class="grid-container pt-1 mb-2 pb-3 mt=0" style={{backgroundColor: "rgb(255,229,234)"}}>
+          <CurrentForum currForum={this.state.currForum}
+                        handlePostSwitch={this.handlePostSwitch}/>
         </div>
+        <div class="grid-container pt-1 pb-3 m-0" style={{backgroundColor: "rgb(232, 239, 248)"}}>
+          <CurrentPost currPostId = {this.state.currPostId}/>  
+        </div>       
       </div>
     );
   }

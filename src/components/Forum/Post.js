@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { auth, db } from "../../services/firebase.js"
 import { Link, Route, useLocation } from 'react-router-dom';
 import Profile from "../../pages/Profile.js";
-
+import "../../Styling/Forum.css"
 
 export default class Post extends Component {
     
@@ -93,36 +93,60 @@ export default class Post extends Component {
     render(){
         return (
             <div>
-                <h3>Post : {this.state.postName}</h3>
-                <label>{this.state.postContent}</label>
-                <ul>
-                    {this.state.comments.map(comment => {
-                        return (
-                            <div>
-                                <li key={comment.id}>
-                                { `${comment.content} by `}
-                                    <Link to={
-                                        {pathname: `/profile/${comment.uid}`}
-                                    }>
-                                    {comment.poster}</Link>
-                                    {"      "}
-                                <a href="#" name={comment.uid} id={comment.id} onClick={this.handleDel}>
-                                        {"⨉"}
-                                </a> 
-                                </li>
+                <div class="jumbotron w-50 mx-auto bg-white" style={{textAlign: "left"}}>
+                    {this.state.postContent}
+                </div>
+                
+                <div id="thePost" style={{backgroundColor: "rgb(229,229,255)"}}>
+                    <div style={{textAlign: "left"}}>
+                    <button class="btn dropdown mb-3" data-toggle="collapse" data-target="#read">
+                        <i class="icon-chevron-right"></i> Read the Comments
+                    </button>
+                    <button class="btn dropdown mb-3" data-toggle="collapse" data-target="#writecomment">
+                        <i class="icon-chevron-right"></i> Write a Comment
+                    </button>
+                    </div>
+                    <div class="collapse" id="read"  data-parent="#thePost">
+                        <div id="accordion" class="pb-3 mx-auto w-75">
+                            {this.state.comments.map(comment => {
+                                return (
+                                    <div class="card">
+                                        <div class="card-header">
+                                        <a class="card-link" key={comment.id} data-toggle="collapse" href="#oneComment">
+                                            A comment by <Link to={{pathname: `/profile/${comment.uid}`}}>
+                                            {comment.poster}
+                                            </Link>
+                                        </a>
+                                        {"      "}
+                                        <button type="button" class="btn btn-secondary" 
+                                                href="#" name={comment.uid} id={comment.id} onClick={this.handleDel}>
+                                            Delete
+                                        </button>
+                                        </div>
+                                        <div id="oneComment" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            {comment.content}
+                                        </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div class="collapse" id="writecomment"  data-parent="#thePost">
+                        <form onSubmit={this.handleComment}>
+                            <div class="form-group">
+                                <h5 for="mycomments">Your comment</h5>
+                                <textarea class="form-control w-50 mx-auto mt-3" rows="3" id="mycomments" value={this.state.commentContent}
+                                            onChange={this.handleChangeComment}/>
                                 <br/>
+                                <button type="submit" class="button mt-0">Post</button>  
                             </div>
-                        )
-                    })}
-                </ul>  
-                <form onSubmit={this.handleComment}>
-                    <label>Your comment</label>
-                    <br/>
-                    <textarea value={this.state.commentContent}
-                                onChange={this.handleChangeComment}/>
-                    <br/>
-                    <input type="submit" value="Post"></input>   
-                </form>   
+                        </form> 
+                    </div>
+                </div>
+
+                  
             </div>
         )
     }
