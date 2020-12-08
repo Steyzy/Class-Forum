@@ -5,7 +5,7 @@ export default class ForumNav extends Component {
     render() {
         return(
             <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <a class="navbar-brand"><img src="icon.jpg" alt="Logo" style={{width: "50px"}}/></a>
+                <a class="navbar-brand"><img src="icon.png" alt="Logo" style={{width: "50px"}}/></a>
                 <a class="navbar-brand" style={{fontSize: "30px"}}>Forum</a>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
