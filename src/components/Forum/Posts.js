@@ -177,20 +177,20 @@ export default class Posts extends Component {
                     <input id="keyword" value={this.state.SearchInput}
                                         onChange={this.handleChangeSearchContent}></input>
                     </div>
-                    <div id="accordion">
+                    <div id="accordion" class="pb-3">
                     {this.state.filteredPosts.map(post => {
                         return (
                             <div class="card">
                             <div class="card-header">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-8 border">
+                                    <div class="col-8">
                                     <a class="card-link" data-toggle="collapse" href="#post" 
                                         key={post.id} style={{fontSize: "18px"}}>
                                         {post.name}
                                     </a>
                                     </div>
-                                    <div class="col-4 border" style={{textAlign: "right"}}>
+                                    <div class="col-4" style={{textAlign: "right"}}>
                                     { ` by `}
                                     <Link to={{pathname: `/profile/${post.uid}`}}>{post.poster}</Link>
                                     {"      "}
