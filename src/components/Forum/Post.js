@@ -93,8 +93,8 @@ export default class Post extends Component {
     render(){
         return (
             <div>
-                <h3>Post : {this.state.postName}</h3>
-                <label>{this.state.postContent}</label>
+                <div class="jumbotron">{this.state.postContent}</div>
+                
                 <ul>
                     {this.state.comments.map(comment => {
                         return (
