@@ -96,7 +96,7 @@ export default class Post extends Component {
     // function name identified by React, do not change
     componentWillReceiveProps(props) {
         this.setState({ 
-            currPostId: this.props.currPostId, 
+            currPostId: props.currPostId, 
             commentContent: '', // needed to clear the textarea after switching forum
         })
         const uid = auth().currentUser.uid;
@@ -106,13 +106,13 @@ export default class Post extends Component {
           }
         });
         
-        db.ref('/allposts/'+this.state.currPostId).once('value', (snapshot) =>{
+        db.ref('/allposts/'+props.currPostId).once('value', (snapshot) =>{
                 this.setState({
                     postName:snapshot.val().name,
                 })
             });
   
-        db.ref('/allposts/'+this.state.currPostId).on('value', snapshot =>{
+        db.ref('/allposts/'+props.currPostId).on('value', snapshot =>{
             let allComments = [];
             snapshot.forEach(snap => {
                 allComments.push({
@@ -121,9 +121,12 @@ export default class Post extends Component {
                                 uid:snap.val().uid,
                                 poster:snap.val().poster});
             });
+            
+            if(allComments.length >= 1){
             this.setState({ comments: allComments.slice(1,allComments.length-1),
                             postContent: allComments[0].content
             });
+            }
         })
             
         

@@ -86,6 +86,7 @@ export default class Posts extends Component {
             db.ref('allposts/'+event.target.id).remove()
             db.ref('/posts/'+this.state.currForum+'/'+event.target.id).remove()
             alert("Well, I guess sometimes humans just want to take back their words...")
+            this.props.handlePostSwitch({name:''})
             return
         }
         alert("Sorry, You can't delete other's post.")

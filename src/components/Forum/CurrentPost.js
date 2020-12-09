@@ -11,6 +11,10 @@ export default class CurrentPost extends Component {
         }
 
     }
+    
+    componentDidMount(){
+      this.setState({ currPostId: this.props.currPostId})
+    }
     // function name identified by React, do not change
     componentWillReceiveProps(props) {
         this.setState({ currPostId: props.currPostId})
