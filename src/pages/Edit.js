@@ -51,7 +51,8 @@ export default class Edit extends Component {
             name: this.state.name,
             major: this.state.major,
             nationality: this.state.nationality,
-            year: this.state.year
+            year: this.state.year,
+            email: auth().currentUser.email
         });
         alert("Successfully saved profile change!")
         this.setState({
@@ -68,41 +69,82 @@ export default class Edit extends Component {
     
 
     render() {
-        return (
-            <div>
-            <ForumNav />    
-                <h1>Edit Profile</h1>
+        if (this.state.name == ""){
+            return (
                 <div>
-                    <form onSubmit={this.handleProfileChange}>
-                        <div>
-                            <label>Change name: </label>
-                            <textarea value={this.state.name}
-                                        onChange={(event)=>{this.handleChange(event,'name')}}
-                            /><br/>
-                        </div>
-                        <div>
-                            <label>Change major: </label>
-                            <textarea value={this.state.major}
-                                        onChange={(event) => {this.handleChange(event,'major')}}
-                            /><br/>
-                        </div>
-                        <div>
-                            <label>Change year: </label>
-                            <textarea value={this.state.year}
-                                        onChange={(event) => {this.handleChange(event,'year')}}
-                            /><br/>
-                        </div>
-                        <div>
-                            <label>Change nationality: </label>
-                            <textarea value={this.state.nationality}
-                                        onChange={(event) => {this.handleChange(event,'nationality')}}
-                            /><br/>
-                        </div>
-                        <input type="submit" value="Finish"></input>   
-                    </form>
-                    { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
+                <ForumNav />
+                    <h1>Edit Profile</h1>
+                    <div>
+                        <form onSubmit={this.handleProfileChange}>
+                            <div>
+                                <label>Please Enter Name: </label>
+                                <textarea value={this.state.name}
+                                            onChange={(event)=>{this.handleChange(event,'name')}}
+                                /><br/>
+                            </div>
+                            <div>
+                                <label>Please Enter Major: </label>
+                                <textarea value={this.state.major}
+                                            onChange={(event) => {this.handleChange(event,'major')}}
+                                /><br/>
+                            </div>
+                            <div>
+                                <label>Please Enter Year of Graduation: </label>
+                                <textarea value={this.state.year}
+                                            onChange={(event) => {this.handleChange(event,'year')}}
+                                /><br/>
+                            </div>
+                            <div>
+                                <label>Please Enter Nationality: </label>
+                                <textarea value={this.state.nationality}
+                                            onChange={(event) => {this.handleChange(event,'nationality')}}
+                                /><br/>
+                            </div>
+                            <input type="submit" value="Finish"></input>
+                        </form>
+                        { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
+                    </div>
                 </div>
-            </div>
-            )
+                )
+
+        }
+        else{
+            return (
+                <div>
+                <ForumNav />
+                    <h1>Edit Profile</h1>
+                    <div>
+                        <form onSubmit={this.handleProfileChange}>
+                            <div>
+                                <label>Edit Name: </label>
+                                <textarea value={this.state.name}
+                                            onChange={(event)=>{this.handleChange(event,'name')}}
+                                /><br/>
+                            </div>
+                            <div>
+                                <label>Edit Major: </label>
+                                <textarea value={this.state.major}
+                                            onChange={(event) => {this.handleChange(event,'major')}}
+                                /><br/>
+                            </div>
+                            <div>
+                                <label>Edit Year of Graduation: </label>
+                                <textarea value={this.state.year}
+                                            onChange={(event) => {this.handleChange(event,'year')}}
+                                /><br/>
+                            </div>
+                            <div>
+                                <label>Edit Nationality: </label>
+                                <textarea value={this.state.nationality}
+                                            onChange={(event) => {this.handleChange(event,'nationality')}}
+                                /><br/>
+                            </div>
+                            <input type="submit" value="Finish"></input>
+                        </form>
+                        { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
+                    </div>
+                </div>
+                )
+        }
     }
 }

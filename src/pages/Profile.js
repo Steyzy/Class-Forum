@@ -11,6 +11,7 @@ export default class Profile extends Component {
             name:"",
             major:"",
             nationality:"",
+            email:"",
             year:"",
         }
         console.log(this.state.uid)
@@ -23,6 +24,7 @@ export default class Profile extends Component {
                     name: snapshot.val().name,
                     major: snapshot.val().major,
                     year: snapshot.val().year,
+                    email: snapshot.val().email,
                     nationality: snapshot.val().nationality
                 })
             }
@@ -37,8 +39,9 @@ export default class Profile extends Component {
                 <ForumNav />    
                 <h1>User Profile</h1>
                 <p>Name: {this.state.name} </p>
+                <p>Email Address: {this.state.email} </p>
                 <p>Major: {this.state.major} </p>
-                <p>Year: {this.state.year} </p>
+                <p>Year of Graduation: {this.state.year} </p>
                 <p>Nationality: {this.state.nationality} </p>
                 <Link to="/edit">Edit Profile</Link>
             </div>
@@ -50,8 +53,9 @@ export default class Profile extends Component {
                 <ForumNav />    
                 <h1>User Profile</h1>
                 <p>Name: {this.state.name} </p>
+                <p>Email Address: {this.state.email} </p>
                 <p>Major: {this.state.major} </p>
-                <p>Year: {this.state.year} </p>
+                <p>Year of Graduation: {this.state.year} </p>
                 <p>Nationality: {this.state.nationality} </p>
             </div>
         )
