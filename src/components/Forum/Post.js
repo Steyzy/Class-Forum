@@ -162,10 +162,13 @@ export default class Post extends Component {
                                             </Link>
                                         </a>
                                         {"      "}
-                                        <button type="button" class="btn btn-secondary" 
-                                                href="#" name={comment.uid} id={comment.id} onClick={this.handleDel}>
-                                            Delete
-                                        </button>
+                                        {comment.uid === auth().currentUser.uid 
+                                            &&
+                                            <button type="button" class="btn btn-secondary" 
+                                                    href="#" name={comment.uid} id={comment.id} onClick={this.handleDel}>
+                                                Delete
+                                            </button>
+                                        }
                                         </div>
                                         <div id="oneComment" class="collapse" data-parent="#accordion">
                                         <div class="card-body">

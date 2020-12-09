@@ -222,14 +222,16 @@ export default class Posts extends Component {
                                             <Link to={{pathname: `/profile/${post.uid}`}}>{post.poster}</Link>
                                             {"      "}
                                             <div class="btn-group">
+                                                {post.uid === auth().currentUser.uid &&
+                                                    <button type="button" class="btn btn-secondary" 
+                                                            href="#" name={post.uid} id={post.id}onClick={this.handleDel}>
+                                                        Delete
+                                                    </button>
+                                                }
                                                 <button type="button" class="btn btn-primary" 
                                                         href="#" name={post.id} onClick={this.handlePostSwitch}>
                                                     View
                                                 </button>
-                                                <button type="button" class="btn btn-secondary" 
-                                                        href="#" name={post.uid} id={post.id}onClick={this.handleDel}>
-                                                    Delete
-                                                </button> 
                                             </div>
                                         </div>                                    
                                     </div>
