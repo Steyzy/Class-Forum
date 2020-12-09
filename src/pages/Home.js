@@ -9,8 +9,8 @@ export default class HomePage extends Component {
       <div>
         <h1>Welcome to Forum</h1>
         <section>
-        <Navbar loggedIn={false} />
-        <p>Find your classmates here!</p>
+        <Navbar loggedIn={false}/>
+        <p class="mt-5">Find your classmates here!</p>
         </section>       
       </div>
     )
