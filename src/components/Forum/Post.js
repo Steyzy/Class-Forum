@@ -38,7 +38,7 @@ export default class Post extends Component {
         alert("Successfully commented!")
     }
     
-    handleDel(event)
+  handleDel(event)
     {
         const uid = auth().currentUser.uid
         if(uid == event.target.name)
@@ -54,10 +54,49 @@ export default class Post extends Component {
         this.setState({ commentContent: event.target.value })
     }    
  
+ componentDidMount()
+ {
+   this.setState({ 
+            currPostId: this.props.currPostId, 
+            commentContent: '', // needed to clear the textarea after switching forum
+        })
+    const uid = auth().currentUser.uid;
+        db.ref('/users/'+uid+'/profile').once('value', (snapshot) => {
+          if(snapshot.val() != null){
+                this.setState({ poster: snapshot.val().name })
+          }
+        });
+        db.ref('/users/'+uid+'/profile').once('value', (snapshot) => {
+          if(snapshot.val() != null){
+                this.setState({ poster: snapshot.val().name })
+          }
+        });
+        
+        db.ref('/allposts/'+this.props.currPostId).once('value', (snapshot) =>{
+                this.setState({
+                    postName:snapshot.val().name,
+                })
+            });
+  
+        db.ref('/allposts/'+this.props.currPostId).once('value', snapshot =>{
+            let allComments = [];
+            snapshot.forEach(snap => {
+                allComments.push({
+                                id:snap.key,
+                                content: snap.val().content,
+                                uid:snap.val().uid,
+                                poster:snap.val().poster});
+            });
+            this.setState({ comments: allComments.slice(1,allComments.length-1),
+                            postContent: allComments[0].content
+            });
+        })
+ }
+ 
     // function name identified by React, do not change
     componentWillReceiveProps(props) {
         this.setState({ 
-            currPostId: props.currPostId, 
+            currPostId: this.props.currPostId, 
             commentContent: '', // needed to clear the textarea after switching forum
         })
         const uid = auth().currentUser.uid;

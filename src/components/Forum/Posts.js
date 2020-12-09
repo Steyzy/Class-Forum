@@ -94,7 +94,6 @@ export default class Posts extends Component {
     handleChangeSearchContent (event) {
         this.setState({ SearchInput: event.target.value })
         let filteredPosts = [];
-        alert(this.state.searchOption)
         switch (this.state.searchOption)
         {
             case 1:
@@ -127,7 +126,6 @@ export default class Posts extends Component {
     
    componentDidMount()
     {
-
         const uid = auth().currentUser.uid;
         db.ref('/users/'+uid+'/profile').once('value', (snapshot) => {
           if(snapshot.val() != null){
@@ -135,7 +133,7 @@ export default class Posts extends Component {
           }
         });
         
-        db.ref('posts/' + this.props.currForum).on('value', snapshot => {
+        db.ref('posts/' + this.props.currForum).once('value', snapshot => {
             let allposts = [];
             snapshot.forEach(snap => {
                 allposts.push({ name:snap.val().name,
