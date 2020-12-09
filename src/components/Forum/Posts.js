@@ -24,7 +24,6 @@ export default class Posts extends Component {
         this.handleChangeSearchOption = this.handleChangeSearchOption.bind(this);
         this.handlePostSwitch =this.handlePostSwitch.bind(this);
         this.handleDel = this.handleDel.bind(this);
-        this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     }
     
     handlePost(event) {    
@@ -95,6 +94,7 @@ export default class Posts extends Component {
     handleChangeSearchContent (event) {
         this.setState({ SearchInput: event.target.value })
         let filteredPosts = [];
+        alert(this.state.searchOption)
         switch (this.state.searchOption)
         {
             case 1:
@@ -122,6 +122,31 @@ export default class Posts extends Component {
     
     handlePostSwitch(event){
         this.props.handlePostSwitch({name: event.target.name});
+    }
+    
+    
+   componentDidMount()
+    {
+
+        const uid = auth().currentUser.uid;
+        db.ref('/users/'+uid+'/profile').once('value', (snapshot) => {
+          if(snapshot.val() != null){
+                this.setState({ poster: snapshot.val().name })
+          }
+        });
+        
+        db.ref('posts/' + this.props.currForum).on('value', snapshot => {
+            let allposts = [];
+            snapshot.forEach(snap => {
+                allposts.push({ name:snap.val().name,
+                                content: snap.val().content, 
+                                id: snap.key, 
+                                uid: snap.val().uid,
+                                poster:snap.val().poster});
+            });
+            this.setState({allposts:allposts});
+            this.setState({filteredPosts:allposts});
+        });
     }
     
     // function name identified by React, do not change
