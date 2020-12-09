@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link } from 'react-router-dom';
-import { logout } from "../helpers/auth"
-import '../Styling/Home.css'
+import { logout } from "../../helpers/auth"
+import '../../Styling/Home.css'
 
 export default class Navbar extends Component {
     constructor(props) {

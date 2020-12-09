@@ -10,6 +10,7 @@ export default class JoinedForums extends Component {
             selectedName: 0,
         }
     }
+
     componentDidMount() {
         db.ref('users/' + auth().currentUser.uid + '/forums').on('value', snapshot => {
             let forums = [];
@@ -19,6 +20,7 @@ export default class JoinedForums extends Component {
             this.setState({ forums: forums});
         })
     }
+    
     render() {        
         return (
             <div>

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Home/Navbar';
 import AddForumForm from '../components/Forum/AddForumForm';
 import ListForums from '../components/Forum/ListForums';
 import JoinedForums from '../components/Forum/JoinedForums';

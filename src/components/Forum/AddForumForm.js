@@ -13,6 +13,7 @@ export default class AddForumForm extends Component {
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleSubmit(event) {
       event.preventDefault(); // this is needed to make it work
       db.ref('/forums/' + this.state.name).update({
@@ -20,9 +21,11 @@ export default class AddForumForm extends Component {
       });
       alert("submitting: " + this.state.name);
     }
+
     handleChange(event) {
       this.setState({[event.target.name]: event.target.value})
     }
+    
     render() {
       return (
         <div>
