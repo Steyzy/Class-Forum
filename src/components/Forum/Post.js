@@ -21,7 +21,8 @@ export default class Post extends Component {
         this.handleDel = this.handleDel.bind(this);
     }
     
-   handleComment(event) {   
+   handleComment(event) {  
+        event.preventDefault(); 
         if( this.state.commentContent.trim() == '')
         {
             alert("Comment must be none-empty.")
@@ -36,6 +37,7 @@ export default class Post extends Component {
             poster: this.state.poster,
         });
         alert("Successfully commented!")
+        this.setState({ commentContent: ''})
     }
     
   handleDel(event)
@@ -78,7 +80,7 @@ export default class Post extends Component {
                 })
             });
   
-        db.ref('/allposts/'+this.props.currPostId).once('value', snapshot =>{
+        db.ref('/allposts/'+this.props.currPostId).on('value', snapshot =>{
             let allComments = [];
             snapshot.forEach(snap => {
                 allComments.push({

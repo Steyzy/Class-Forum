@@ -27,6 +27,7 @@ export default class Posts extends Component {
     }
     
     handlePost(event) {    
+        event.preventDefault();
         if(this.state.postName.trim() == '' || this.state.postContent.trim() == '')
         {
             alert("Name and content must be none-empty.")
@@ -50,6 +51,7 @@ export default class Posts extends Component {
             content:this.state.postContent,
         })
         alert("Successfully posted!")
+        this.setState({ postName: '', postContent: '' })
     }
     
     handleChangeSearchOption(event)
@@ -124,7 +126,6 @@ export default class Posts extends Component {
         this.props.handlePostSwitch({name: event.target.name});
     }
     
-    
    componentDidMount()
     {
         const uid = auth().currentUser.uid;
@@ -134,7 +135,7 @@ export default class Posts extends Component {
           }
         });
         
-        db.ref('posts/' + this.props.currForum).once('value', snapshot => {
+        db.ref('posts/' + this.props.currForum).on('value', snapshot => {
             let allposts = [];
             snapshot.forEach(snap => {
                 allposts.push({ name:snap.val().name,
