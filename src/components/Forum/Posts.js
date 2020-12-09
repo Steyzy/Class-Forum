@@ -24,6 +24,7 @@ export default class Posts extends Component {
         this.handleChangeSearchOption = this.handleChangeSearchOption.bind(this);
         this.handlePostSwitch =this.handlePostSwitch.bind(this);
         this.handleDel = this.handleDel.bind(this);
+        this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     }
     
     handlePost(event) {    
@@ -139,7 +140,7 @@ export default class Posts extends Component {
           }
         });
         
-        db.ref('posts/' + this.state.currForum).on('value', snapshot => {
+        db.ref('posts/' + props.currForum).on('value', snapshot => {
             let allPosts = [];
             snapshot.forEach(snap => {
                 allPosts.push({ name:snap.val().name,
@@ -176,6 +177,7 @@ export default class Posts extends Component {
                             <h5 for="keyword">Type the keyword</h5>
                             <input id="keyword" value={this.state.SearchInput}
                                         onChange={this.handleChangeSearchContent}></input>
+                        </div>
                         </div>
                         <div id="accordion" class="pb-3">
                             {this.state.filteredPosts.map(post => {
@@ -216,7 +218,7 @@ export default class Posts extends Component {
                             </div>
                             )})} 
                         </div>                            
-                    </div>
+                
                     <div class="collapse ml-5 mr-5 pl-5 pr-5" id="write"  data-parent="#myPost">
                         <form onSubmit={this.handlePost}>
                             <div class="form-group">
