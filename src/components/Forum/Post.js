@@ -89,9 +89,11 @@ export default class Post extends Component {
                                 uid:snap.val().uid,
                                 poster:snap.val().poster});
             });
+            if(allComments.length >= 1){
             this.setState({ comments: allComments.slice(1,allComments.length-1),
                             postContent: allComments[0].content
             });
+            }
         })
  }
  
