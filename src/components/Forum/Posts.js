@@ -144,7 +144,7 @@ export default class Posts extends Component {
                                 uid: snap.val().uid,
                                 poster:snap.val().poster});
             });
-            this.setState({allposts:allposts});
+            this.setState({allPosts:allposts});
             this.setState({filteredPosts:allposts});
         });
     }
