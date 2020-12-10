@@ -69,82 +69,42 @@ export default class Edit extends Component {
     }    
     
 
-    render() {
-        if (this.state.name == ""){
-            return (
-                <div>
-                <ForumNav />
-                    <h1>Edit Profile</h1>
-                    <div>
-                        <form onSubmit={this.handleProfileChange}>
-                            <div>
-                                <label>Please Enter Name: </label>
-                                <textarea value={this.state.name}
-                                            onChange={(event)=>{this.handleChange(event,'name')}}
-                                /><br/>
-                            </div>
-                            <div>
-                                <label>Please Enter Major: </label>
-                                <textarea value={this.state.major}
-                                            onChange={(event) => {this.handleChange(event,'major')}}
-                                /><br/>
-                            </div>
-                            <div>
-                                <label>Please Enter Year of Graduation: </label>
-                                <textarea value={this.state.year}
-                                            onChange={(event) => {this.handleChange(event,'year')}}
-                                /><br/>
-                            </div>
-                            <div>
-                                <label>Please Enter Nationality: </label>
-                                <textarea value={this.state.nationality}
-                                            onChange={(event) => {this.handleChange(event,'nationality')}}
-                                /><br/>
-                            </div>
-                            <input type="submit" value="Finish"></input>
-                        </form>
-                        { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
-                    </div>
+    render() {       
+        return (
+            <div>
+            <ForumNav />
+                <h3>Edit Profile</h3>
+                <div class="grid-container w-25 mx-auto pt-3">
+                    <form onSubmit={this.handleProfileChange}>
+                        <div class="form-group">
+                            <p for="edname" class="edit">Edit Name: </p>
+                            <input type="text" class="form-control" value={this.state.name} id="edname"
+                                        onChange={(event)=>{this.handleChange(event,'name')}}/>
+                        </div>
+                        <div class="form-group">
+                            <p for="edmajor" class="edit">Edit Major: </p>
+                            <input type="text" class="form-control" id="edmajor" value={this.state.major}
+                                        onChange={(event) => {this.handleChange(event,'major')}}
+                            />
+                        </div>
+                        <div class="form-group">
+                            <p for="edyear" class="edit">Edit Year of Graduation: </p>
+                            <input type="text" class="form-control" id="edyear" value={this.state.year}
+                                        onChange={(event) => {this.handleChange(event,'year')}}
+                            />
+                        </div>
+                        <div class="form-group">
+                            <p for="ednation" class="edit">Edit Nationality: </p>
+                            <input type="text" class="form-control" id="ednation" value={this.state.nationality}
+                                        onChange={(event) => {this.handleChange(event,'nationality')}}
+                            />
+                        </div>
+                        <button type="submit" class="button">Finish</button>
+                    </form>
+                    { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
                 </div>
-                )
-
-        }
-        else{
-            return (
-                <div>
-                <ForumNav />
-                    <h3>Edit Profile</h3>
-                    <div class="grid-container w-25 mx-auto pt-3">
-                        <form onSubmit={this.handleProfileChange}>
-                            <div class="form-group">
-                                <p for="edname" class="edit">Edit Name: </p>
-                                <input type="text" class="form-control" value={this.state.name} id="edname"
-                                            onChange={(event)=>{this.handleChange(event,'name')}}/>
-                            </div>
-                            <div class="form-group">
-                                <p for="edmajor" class="edit">Edit Major: </p>
-                                <input type="text" class="form-control" id="edmajor" value={this.state.major}
-                                            onChange={(event) => {this.handleChange(event,'major')}}
-                                />
-                            </div>
-                            <div class="form-group">
-                                <p for="edyear" class="edit">Edit Year of Graduation: </p>
-                                <input type="text" class="form-control" id="edyear" value={this.state.year}
-                                            onChange={(event) => {this.handleChange(event,'year')}}
-                                />
-                            </div>
-                            <div class="form-group">
-                                <p for="ednation" class="edit">Edit Nationality: </p>
-                                <input type="text" class="form-control" id="ednation" value={this.state.nationality}
-                                            onChange={(event) => {this.handleChange(event,'nationality')}}
-                                />
-                            </div>
-                            <button type="submit" class="button">Finish</button>
-                        </form>
-                        { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
-                    </div>
-                </div>
-                )
-        }
+            </div>
+            )
+        
     }
 }
