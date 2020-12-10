@@ -60,29 +60,6 @@ export default class SignUp extends Component {
           </section>
         </form>
       </div>
-      /*<div>
-        <form onSubmit={this.handleSubmit}>
-          <Title>
-            Sign Up to <Words as='a' href="/" font-size='2.5em'>Forum</Words>
-          </Title>
-          <Wrapper>
-          <Words>Fill in the form below to create an account.</Words>
-          <div>
-            <Typein placeholder="Email" name="email" type="email" 
-              onChange={this.handleChange} value={this.state.email}></Typein>
-          </div>
-          <div>
-            <Typein placeholder="Password" name="password" 
-              onChange={this.handleChange} value={this.state.password} type="password"></Typein>
-          </div>
-          <div>
-            {this.state.error ? <Words>{this.state.error}</Words> : null}
-            <Button type="submit">Sign up</Button>
-          </div>
-          <Words>Already have an account? <Link to="/login">Login</Link></Words>
-          </Wrapper>
-        </form>
-      </div>*/
     )
   }
 }

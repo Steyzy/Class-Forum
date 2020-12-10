@@ -2,6 +2,7 @@ import React, { Component, createElement } from "react"
 import ForumNav from '../components/Forum/ForumNav';
 import { Link } from 'react-router-dom';
 import { auth, db } from "../services/firebase.js"
+import "../Styling/Home.css"
 
 export default class Profile extends Component {
     constructor(props) {
@@ -37,13 +38,17 @@ export default class Profile extends Component {
     		return (
             <div>
                 <ForumNav />    
-                <h1>User Profile</h1>
-                <p>Name: {this.state.name} </p>
-                <p>Email Address: {this.state.email} </p>
-                <p>Major: {this.state.major} </p>
-                <p>Year of Graduation: {this.state.year} </p>
-                <p>Nationality: {this.state.nationality} </p>
-                <Link to="/edit">Edit Profile</Link>
+                <h3>User Profile</h3>
+                <section className="profile">
+                <div class="grid-container mx-auto pb-4" style={{width: "40%"}}>
+                    <p className="profile"><strong>Name: </strong>{this.state.name} </p>
+                    <p className="profile"><strong>Email Address: </strong>{this.state.email} </p>
+                    <p className="profile"><strong>Major: </strong>{this.state.major} </p>
+                    <p className="profile"><strong>Year of Graduation: </strong>{this.state.year} </p>
+                    <p className="profile"><strong>Nationality: </strong>{this.state.nationality} </p>                   
+                </div>
+                <a href="/edit" class="button">Edit Profile</a>
+                </section>
             </div>
         )
     	}
@@ -51,12 +56,16 @@ export default class Profile extends Component {
     		return (
             <div>
                 <ForumNav />    
-                <h1>User Profile</h1>
-                <p>Name: {this.state.name} </p>
-                <p>Email Address: {this.state.email} </p>
-                <p>Major: {this.state.major} </p>
-                <p>Year of Graduation: {this.state.year} </p>
-                <p>Nationality: {this.state.nationality} </p>
+                <h3>User Profile</h3>
+                <section style={{paddingTop: "2em"}}>
+                <div class="grid-container w-25 mx-auto pb-4">
+                    <p className="profile"><strong>Name: </strong>{this.state.name} </p>
+                    <p className="profile"><strong>Email Address: </strong>{this.state.email} </p>
+                    <p className="profile"><strong>Major: </strong>{this.state.major} </p>
+                    <p className="profile"><strong>Year of Graduation: </strong>{this.state.year} </p>
+                    <p className="profile"><strong>Nationality: </strong>{this.state.nationality} </p>
+                </div>
+                </section>
             </div>
         )
     	}

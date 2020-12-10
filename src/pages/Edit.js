@@ -6,6 +6,7 @@ import ForumNav from '../components/Forum/ForumNav';
 //import ChangeMajor from "../components/Profile/ChangeMajor";
 import { Link, Redirect } from 'react-router-dom';
 import { auth, db } from "../services/firebase.js"
+import "../Styling/Home.css"
 
 
 export default class Edit extends Component {
@@ -112,34 +113,33 @@ export default class Edit extends Component {
             return (
                 <div>
                 <ForumNav />
-                    <h1>Edit Profile</h1>
-                    <div>
+                    <h3>Edit Profile</h3>
+                    <div class="grid-container w-25 mx-auto pt-3">
                         <form onSubmit={this.handleProfileChange}>
-                            <div>
-                                <label>Edit Name: </label>
-                                <textarea value={this.state.name}
-                                            onChange={(event)=>{this.handleChange(event,'name')}}
-                                /><br/>
+                            <div class="form-group">
+                                <p for="edname" class="edit">Edit Name: </p>
+                                <input type="text" class="form-control" value={this.state.name} id="edname"
+                                            onChange={(event)=>{this.handleChange(event,'name')}}/>
                             </div>
-                            <div>
-                                <label>Edit Major: </label>
-                                <textarea value={this.state.major}
+                            <div class="form-group">
+                                <p for="edmajor" class="edit">Edit Major: </p>
+                                <input type="text" class="form-control" id="edmajor" value={this.state.major}
                                             onChange={(event) => {this.handleChange(event,'major')}}
-                                /><br/>
+                                />
                             </div>
-                            <div>
-                                <label>Edit Year of Graduation: </label>
-                                <textarea value={this.state.year}
+                            <div class="form-group">
+                                <p for="edyear" class="edit">Edit Year of Graduation: </p>
+                                <input type="text" class="form-control" id="edyear" value={this.state.year}
                                             onChange={(event) => {this.handleChange(event,'year')}}
-                                /><br/>
+                                />
                             </div>
-                            <div>
-                                <label>Edit Nationality: </label>
-                                <textarea value={this.state.nationality}
+                            <div class="form-group">
+                                <p for="ednation" class="edit">Edit Nationality: </p>
+                                <input type="text" class="form-control" id="ednation" value={this.state.nationality}
                                             onChange={(event) => {this.handleChange(event,'nationality')}}
-                                /><br/>
+                                />
                             </div>
-                            <input type="submit" value="Finish"></input>
+                            <button type="submit" class="button">Finish</button>
                         </form>
                         { this.state.redirect ? (<Redirect push to="/profile"/>) : null }
                     </div>

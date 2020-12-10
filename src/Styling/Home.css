@@ -7,6 +7,15 @@ h1{
     color: deepgrey;
 }
 
+h3{
+    font-size: 2.5em;
+    text-align: center; 
+    background: #d9f2ff;
+    padding: 0.5em;
+    margin: 0;
+    color: deepgrey;
+}
+
 section{
     padding-top: 7em;
     padding-bottom: 2em;
@@ -59,4 +68,20 @@ input{
 
 .smallPadding{
     padding-top: 2em;
+}
+
+p.profile{
+    text-align: left;
+    font-size: 1.05em;
+    margin: 1em;
+}
+
+section.profile{
+    padding-top: 2em;
+    background-color: white;
+}
+
+p.edit{
+    text-align: left;
+    font-size: 1em;
 }
