@@ -39,10 +39,6 @@ script里不太安全。  - Ray
   $ npm install
   ```
 - Setup Firebase  
-  <sub>
-    Not 100% sure if the app will work after these commands. 
-    Contact me if it doesn't
-  </sub>
   > run the command below
   ```shell
   $ curl -sL https://firebase.tools | bash
