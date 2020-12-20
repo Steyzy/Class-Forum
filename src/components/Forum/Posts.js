@@ -212,7 +212,7 @@ export default class Posts extends Component {
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-8">
-                                            <a class="card-link" data-toggle="collapse" href="#post" 
+                                            <a class="card-link" data-toggle="collapse" href={"#post"+post.id} 
                                                 key={post.id} style={{fontSize: "18px"}}>
                                                 {post.name}
                                             </a>
@@ -237,7 +237,7 @@ export default class Posts extends Component {
                                     </div>
                                 </div>
                                 </div>
-                                <div id="post" class="collapse" data-parent="#accordion">
+                                <div id={"post"+post.id} class="collapse" data-parent="#accordion">
                                     <div class="card-body" style={{textAlign: "left"}}>
                                         {post.content}
                                     </div>

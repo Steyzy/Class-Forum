@@ -158,7 +158,7 @@ export default class Post extends Component {
                                 return (
                                     <div class="card">
                                         <div class="card-header">
-                                        <a class="card-link" key={comment.id} data-toggle="collapse" href="#oneComment">
+                                        <a class="card-link" key={comment.id} data-toggle="collapse" href={"#comment"+comment.id}>
                                             A comment by <Link to={{pathname: `/profile/${comment.uid}`}}>
                                             {comment.poster}
                                             </Link>
@@ -172,7 +172,7 @@ export default class Post extends Component {
                                             </button>
                                         }
                                         </div>
-                                        <div id="oneComment" class="collapse" data-parent="#accordion">
+                                        <div id={"comment"+comment.id} class="collapse" data-parent="#accordion">
                                         <div class="card-body">
                                             {comment.content}
                                         </div>
