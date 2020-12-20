@@ -32,15 +32,6 @@
   $ cd forum
   $ npm install
   ```
-- Setup Firebase  
-  > run the command below
-  ```shell
-  $ curl -sL https://firebase.tools | bash
-  $ firebase login
-  # And then log in from the browser
-  $ firebase init
-  $ firebase deploy
-  ```
 - Start the project
   > run the command below
   ```shell
