@@ -16,9 +16,11 @@
 - You need to have Node and NPM installed on your computer.
 - Installing Node automatically comes with npm.
 
+  Link for installation: https://nodejs.org/en/download/
+
 #### Clone
 
-- Clone this project to your local machine `https://github.com/rayguo233/forum.git`
+- If you haven't downloaded the source code, clone this project to your local machine `https://github.com/rayguo233/forum.git`
   > run the command below
   ```
   $ git clone https://github.com/rayguo233/forum.git
