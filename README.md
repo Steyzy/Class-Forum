@@ -34,6 +34,10 @@
   $ cd forum
   $ npm install
   ```
+- Include your Firebase credentials
+
+  Fill in the `src/services/firebase.js` file appropriately.
+
 - Start the project
   > run the command below
   ```shell
